@@ -1,0 +1,309 @@
+EXERCICE 8
+
+void mainImage( out vec4 fragColor, in vec2 fragCoord )
+{
+    // Normalized pixel coordinates (from 0 to 1)
+    vec2 uv = fragCoord/iResolution.yy;
+    // Time varying pixel color
+    vec3 col2 = vec3(0.6,0.2,0.0); //+ 0.5*cos(iTime+uv.xyx+vec3(0,2,4));
+    vec3 col = vec3(0.0,0.3,0.5);
+    vec3 col3 = vec3(0.1,0.2,0.7);
+    float r;
+ 
+    for (r = 0.0; r <2.01; r += 0.05) {
+        if (abs(uv.x-r) <0.003){fragColor = vec4(col2, 0.1);}
+    }
+    for (r = 0.0; r < 1.0; r += 0.05) {
+        if (abs(uv.y-r) <0.003) {fragColor = vec4(col2, 0.1);}   
+    }
+    if (uv.x >0.89 &&uv.x < 0.91){fragColor = vec4(col3, 0.1);}
+    if (uv.y >0.49 &&uv.y < 0.51){fragColor = vec4(col, 0.1);}    
+ 
+    
+ }
+
+EXERCICE 9
+
+void mainImage( out vec4 fragColor, in vec2 fragCoord )
+{
+    // Normalized pixel coordinates (from 0 to 1)
+    vec2 uv = fragCoord/iResolution.yy;
+    // Time varying pixel color
+    vec3 col2 = vec3(0.6,0.2,0.8); //+ 0.5*cos(iTime+uv.xyx+vec3(0,2,4));
+    vec3 col = vec3(0.12,0.254,0.741);
+    vec3 col3 = vec3(1.0,1.0,0.0);
+    float r;
+     
+     
+    vec2 uv2 = vec2(uv.x - 1.0, uv.y - 0.5);
+    if (length(uv2.xy) < 0.4) {
+        fragColor = vec4(col, 0.1);}
+    
+    vec2 uv3 = vec2(uv.x - 1.0, uv.y - 0.5);
+    if (length(uv3.xy) < 0.2) {
+        fragColor = vec4(col3, 0.1);}
+        
+    vec2 uv1 = vec2(uv.x - 1.5, uv.y - 0.3);
+    if (length(uv1.xy) < 0.25) {
+        fragColor = vec4(col2, 0.1);}
+    
+    
+ }
+
+
+EXERCICE 10
+
+void circle(vec2 uv, vec3 col, float  R, float X, float Y, inout vec4 fragColor)
+{
+    vec2 uv2 = vec2(uv.x - X, uv.y - Y);
+    if (length(uv2.xy) < R) {
+        fragColor = vec4(col, 0.1);}
+}
+
+void mainImage( out vec4 fragColor, in vec2 fragCoord )
+{
+    // Normalized pixel coordinates (from 0 to 1)
+    vec2 uv = fragCoord/iResolution.yy;
+    // Time varying pixel color
+    vec3 col2 = vec3(0.6,0.2,0.8); //+ 0.5*cos(iTime+uv.xyx+vec3(0,2,4));
+    vec3 col = vec3(0.12,0.254,0.741);
+    vec3 col3 = vec3(1.0,1.0,0.0);
+    float r;
+     
+     
+    circle(uv, col, 0.4, 1.0, 0.5, fragColor);
+    circle(uv, col2, 0.2, 1.0, 0.5, fragColor);
+    circle(uv, col3, 0.25, 1.5, 0.3, fragColor);
+    
+    
+ }
+
+EXERCICE 11 : 
+void mainImage( out vec4 fragColor, in vec2 fragCoord)
+{
+    vec2 p = vec2(fragCoord.xy / iResolution.xy);
+    
+    vec3 bgCol = vec3(0.0);
+    vec3 pixel = bgCol;
+    
+    float ret = smoothstep(0.30, 0.55, p.y);
+    
+    pixel = vec3(ret);
+    
+    fragColor = vec4(pixel, 1.0);
+    
+}
+
+EXERCICE 12:
+void mainImage( out vec4 fragColor, in vec2 fragCoord)
+{
+    vec2 p = vec2(fragCoord.xy / iResolution.xy);
+    
+    vec3 bgCol = vec3(0.0, 0.0, 0.0);
+    vec3 pixel = bgCol;
+    vec3 bgCol1 = vec3(0.6, 0.2, 0.8);
+    vec3 bgCol2 = vec3(0.1, 0.2, 0.8);
+    
+    float ret = smoothstep(0.45,0.6, p.y);
+    
+    pixel = vec3(ret)*bgCol1 + bgCol2;
+    
+    fragColor = vec4(pixel, 0.1);
+    
+}
+
+EXERCICE 13 :
+void mainImage( out vec4 fragColor, in vec2 fragCoord)
+{
+    vec2 p = vec2(fragCoord.xy / iResolution.xy);
+    
+    vec3 bgCol = vec3(0.0, 0.0, 0.0);
+    vec3 pixel = bgCol;
+    vec3 bgCol1 = vec3(0.6, 0.2, 0.8);
+    vec3 bgCol2 = vec3(0.1, 0.2, 0.8);
+    
+    float ret = smoothstep(0.45,0.6, p.y);
+    
+    pixel = mix(bgCol1, bgCol2, ret);
+    
+    fragColor = vec4(pixel, 0.1);
+    
+}
+
+EXERCICE 14 :
+void mainImage( out vec4 fragColor, in vec2 fragCoord)
+{
+    vec2 uv = vec2(fragCoord.xy / iResolution.xy);
+    
+    vec3 bgCol = vec3(0.6, 0.2, 0.8);
+    vec3 bgCol2 = vec3(0.6, 0.2, 0.3);
+    vec3 bgCol3 = vec3(0.1, 0.1, 0.1);
+    vec3 pixel = bgCol;
+    // Time varying pixel color
+    vec3 col2 = vec3(0.6,0.2,0.0); //+ 0.5*cos(iTime+uv.xyx+vec3(0,2,4));
+    vec3 col = vec3(0.0,0.3,0.5);
+    vec3 col3 = vec3(0.1,0.2,0.7);
+    float radian = radians(360.0);
+    float r;
+    
+    //for (r = 0.0; r <1.0; r += 0.001) {
+        if ((abs(sin(uv.x*radian) - uv.y) < 0.008)) {fragColor = vec4(pixel, 0.1);}
+        if ((abs(sin(uv.x*2.0*radian) - uv.y) < 0.008)) {fragColor = vec4(pixel, 0.1);}
+        if ((abs(sin(uv.x*2.0*radian) - uv.y*2.0+1.0) < 0.02)) {fragColor = vec4(bgCol2, 0.1);}
+        //if ( ((uv.x - 0.5) < 0.002) && ((uv.y - 0.5) < 0.002))  {fragColor = vec4(bgCol3, 0.1);}
+    //} 
+    //for (r = 0.0; r <2.01; r += 0.05) {
+    //    if (abs(uv.x-r) <0.003){fragColor = vec4(col2, 0.1);}
+    //}
+    //for (r = 0.0; r < 1.0; r += 0.05) {
+    //    if (abs(uv.y-r) <0.003) {fragColor = vec4(col2, 0.1);}   
+    //}
+    if (uv.x >0.499 &&uv.x < 0.505){fragColor = vec4(col3, 0.1);}
+    if (uv.y >0.499 &&uv.y < 0.505){fragColor = vec4(col, 0.1);}
+    
+    if ((abs((sqrt(uv.x)) - uv.y) < 0.008)) {fragColor = vec4(pixel, 0.1);}
+    if ((abs((inversesqrt(uv.x)) - uv.y) < 0.008)) {fragColor = vec4(pixel, 0.1);}
+    if ((abs(exp(uv.x) - uv.y) < 0.005)) {fragColor = vec4(col3, 0.1);}
+    if ((abs((uv.x*4.0-2.0)*(uv.x*4.0-2.0) - uv.y) < 0.005)) {fragColor = vec4(col3, 0.1);}
+}
+
+EXERCICE 15:
+
+void mainImage( out vec4 fragColor, in vec2 fragCoord )
+{
+    // Normalized pixel coordinates (from 0 to 1)
+    vec2 uv = fragCoord/iResolution.yy;
+    // Time varying pixel color
+    vec3 col2 = vec3(0.6,0.2,0.8); //+ 0.5*cos(iTime+uv.xyx+vec3(0,2,4));
+    vec3 col = vec3(0.12,0.254,0.741);
+    vec3 col3 = vec3(1.0,1.0,0.0);
+    float r;
+     
+     
+    vec2 uv2 = vec2(uv.x - 0.885, uv.y - 0.5);
+    if (length(uv2.xy) < 0.3) {
+        vec3 col = vec3(1.0);
+        fragColor = vec4(col, 0.1);}
+    else {
+        vec3 col = vec3(0.0);
+        fragColor = vec4(col, 0.1);}
+    
+    
+    
+    
+ }
+
+EXERCICE 16 :
+void disk(vec2 uv, float r, float height, float dist, vec3 color, vec3 color2, float radius, inout vec4 fragColor){
+        vec2 uv2 = vec2(uv.x - (dist * r), uv.y - height);
+        if (length(uv2.xy) < radius) {
+            vec3 col = color;
+            fragColor = vec4(col, 0.1);
+            }
+        //else {
+            //vec3 col = color2;
+            //fragColor = vec4(col, 0.1);}
+}
+
+void disk2(vec2 uv, float r, float height, float dist, vec3 color, vec3 color2, float radius, inout vec3 color_final, inout bool adv){
+        vec2 uv2 = vec2(uv.x - (dist * r), uv.y - height);
+        if (length(uv2.xy) < radius) {
+            vec3 col = color;
+            color_final = col;
+            adv = true;
+            }
+        
+}
+
+void mainImage( out vec4 fragColor, in vec2 fragCoord )
+{
+    // Normalized pixel coordinates (from 0 to 1)
+    vec2 uv = fragCoord/iResolution.yy;
+    // Time varying pixel color
+    vec3 col2 = vec3(0.6,0.2,0.8); //+ 0.5*cos(iTime+uv.xyx+vec3(0,2,4));
+    vec3 col = vec3(0.12,0.254,0.741);
+    vec3 col3 = vec3(1.0,1.0,0.0);
+    vec3 col4 = vec3(0.0,1.0,1.0);
+    vec3 col5 = vec3(1.0,0.0,1.0);
+    vec3 col6 = vec3(0.0,0.0,0.0);
+    vec3 col7 = vec3(1.0,1.0,1.0);
+    
+    vec3 color_final;
+    vec3 color_final_2;
+    vec3 color_final_3;
+    bool boolean = false;
+    float r = iResolution.x/iResolution.y;
+     
+    if (uv.x < (1./3. * r)) {
+        disk2(uv, r, 0.75, (1./3./1.5), col5, col6 ,0.15,  color_final, boolean);
+        disk2(uv, r, 0.5, (1./3./2.), col4, col6 ,0.15,  color_final, boolean);
+        disk2(uv, r, 0.25, (1./3./1.5), col3, col6 ,0.15,  color_final, boolean);
+        if (boolean){
+            fragColor = vec4(color_final, 0.1);}
+        else{
+            fragColor = vec4(vec3(0.5,0.5,0.5), 0.1);}
+     }
+     if ((uv.x < (2./3. * r)) && (uv.x > (1./3. *r))) {
+        fragColor = vec4(vec3(1.0,1.0,1.0), 0.1);
+        disk2(uv, r, 0.5,(0.5), col2, col2 ,0.15,  color_final, boolean);
+        disk2(uv, r, 0.65,(0.55), col4, col2 ,0.15,  color_final_2, boolean);
+        disk2(uv, r, 0.45,(0.55), col3, col2 ,0.15,  color_final_3, boolean);
+        if (boolean){
+            fragColor = vec4(abs(vec3(1.0,1.0,1.0)-color_final-color_final_2-color_final_3), 0.1);}
+        else{
+            fragColor = vec4(vec3(1.0,1.0,0.8), 1.0);}
+        
+     }
+     if (uv.x > (2./3. * r)) {
+        fragColor = vec4(vec3(1.0,1.0,1.0), 0.1);
+        disk2(uv, r, 0.5,(2./3.+0.5/3.0), col, col2 ,0.15,  color_final, boolean);
+        disk2(uv, r, 0.65,(2./3.+0.75/3.0), col5, col2 ,0.15,  color_final_2, boolean);
+        disk2(uv, r, 0.45,(2./3.+0.75/3.0), col3, col2 ,0.15,  color_final_3, boolean);
+        if (boolean){
+            fragColor = vec4(color_final+color_final_2+color_final_3, 0.1);}
+        else{
+            fragColor = vec4(vec3(0.8,0.8,0.8), 0.1);}
+     }
+      
+ }
+
+EXERCICE 17 :
+
+Not doing that, lazy
+
+EXERCICE 18 : 
+void circle(vec2 uv, vec4 iMouse, vec3 col, float  R, float X, float Y, inout vec4 fragColor)
+{
+    //vec2 uv2 = vec2(uv.x - X, uv.y - Y);
+    if (length(uv.xy - iMouse.xy) < R) {
+        fragColor = vec4(col, 0.1);}
+}
+
+
+void mainImage( out vec4 fragColor, in vec2 fragCoord )
+{
+    // Normalized pixel coordinates (from 0 to 1)
+    vec2 uv = fragCoord;
+    // Time varying pixel color
+    vec3 col2 = vec3(0.6,0.2,0.8); //+ 0.5*cos(iTime+uv.xyx+vec3(0,2,4));
+    vec3 col = vec3(0.12,0.254,0.741);
+    vec3 col3 = vec3(1.0,1.0,0.0);
+    vec3 col4 = vec3(0.0,1.0,1.0);
+    vec3 col5 = vec3(1.0,0.0,1.0);
+    vec3 col6 = vec3(0.0,0.0,0.0);
+    vec3 col7 = vec3(1.0,1.0,1.0);
+    
+    vec3 color_final;
+    vec3 color_final_2;
+    vec3 color_final_3;
+    bool boolean = false;
+    vec3 ret;
+    float r = iResolution.x/iResolution.y;
+    
+    circle(uv, iMouse, col3, 20.0, 1.0, 0.5, fragColor);
+           
+ }
+
+EXERCICE 19 : 
+
+EASY
