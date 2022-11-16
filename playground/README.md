@@ -1,1 +1,1 @@
-rectory where I (Leandro) will trian myself for OpenGL, don't mind it.
+Directory where I will train myself for OpenGL, don't mind it.
