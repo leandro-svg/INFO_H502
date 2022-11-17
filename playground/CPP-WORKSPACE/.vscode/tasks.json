@@ -9,11 +9,15 @@
                 "-std=c++17",
                 "-I./include",
                 "-L./lib",
-                "src/\\*.cpp",
-                "src/glad.c",
-                "-lglfw3dll",
+                "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/glad.c",
+                "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/main.cpp",
+                "-L",
+                "/usr/local/lib/",
+                "-lglfw3",
                 "-o",
-                "${workspaceFolder}/myprogram.exe"
+                "${workspaceFolder}/myprogram.exe",
+                "-ldl",
+                "-pthread"
             ],
             "options": {
                 "cwd": "${fileDirname}"
