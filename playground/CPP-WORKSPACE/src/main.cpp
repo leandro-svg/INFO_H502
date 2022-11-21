@@ -1,6 +1,6 @@
 #include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/glad/glad.h>
 #include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/GLFW/glfw3.h>
-
+//We change something to see if it's working
 #include <iostream>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
