@@ -1,6 +1,5 @@
 #include </home/flo/INFO_H502/playground/CPP-WORKSPACE/include/glad/glad.h>
 #include </home/flo/INFO_H502/playground/CPP-WORKSPACE/include/GLFW/glfw3.h>
-
 #include <iostream>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
