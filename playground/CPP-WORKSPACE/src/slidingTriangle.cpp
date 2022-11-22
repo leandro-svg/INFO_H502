@@ -4,6 +4,7 @@
 #include <../include/learopengl/shader_s.h>
 
 #include <iostream>
+#include <cmath>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow *window);
@@ -47,7 +48,7 @@ int main()
 
     // build and compile our shader program
     // ------------------------------------
-    Shader ourShader("./shaders/vertex/3.3.shader.vs", "./shaders/fragment/3.3.shader.fs"); // you can name your shader files however you like
+    Shader ourShader("./shaders/vertex/horizontalOffest.vs", "./shaders/fragment/3.3.shader.fs"); // you can name your shader files however you like
 
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
@@ -95,6 +96,13 @@ int main()
         // render the triangle
         ourShader.use();
         glBindVertexArray(VAO);
+
+        // update shader uniform
+        double  timeValue = glfwGetTime();
+        float greenValue = static_cast<float>(sin(timeValue) / 2.0 + 0.5);
+        int vertexColorLocation = glGetUniformLocation(ourShader.ID, "offset");
+        glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
+
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
