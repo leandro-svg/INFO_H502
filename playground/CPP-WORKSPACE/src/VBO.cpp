@@ -1,5 +1,5 @@
 #include"VBO.h"
-// Vertex Buffer class 
+// Vertex Buffer Object class 
 // VBO to pack object with the vertex data
 
 // Constructor that generates a Vertex Buffer Object and links it to vertices
