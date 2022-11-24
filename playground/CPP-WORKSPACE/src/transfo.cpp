@@ -1,9 +1,11 @@
 #include <../include/glad/glad.h>
 #include <../include/GLFW/glfw3.h>
 
-#include <../include/learopengl/shader_s.h>
+#include <../include/learopengl/shader_m.h>
 
-
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include <iostream>
 #include <cmath>
 
@@ -54,7 +56,7 @@ int main()
 
     // build and compile our shader program
     // ------------------------------------
-    Shader ourShader("./shaders/vertex/texture.vs", "./shaders/fragment/texture.fs"); // you can name your shader files however you like
+    Shader ourShader("./shaders/vertex/transfo.vs", "./shaders/fragment/texture.fs"); // you can name your shader files however you like
 
     Shader ourShaderSecond("./shaders/vertex/horizontalOffest.vs", "./shaders/fragment/3.3.shader.fs"); // you can name your shader files however you like
     // Shader ourShaderSecond("shaders/vertex/3.3.shader.vs", "./shaders/fragment/simple.fs"); // you can name your shader files however you like
@@ -65,32 +67,33 @@ int main()
     // ------------------------------------------------------------------
     float vertices[] = {
         // positions          // colors           // texture coords
-        0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   2.0f, 2.0f,   // top right
-        0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   2.0f, 0.0f,   // bottom right
+        0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
+        0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
         -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
-        -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 2.0f    // top left 
+        -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left 
     };
 
     float verticesSecond[] = {
         // positions         // colors
-        0.7f, -0.7f, 0.0f,  1.0f, 0.0f, 1.0f,  // bottom right
-        0.7f, -0.9f, 0.0f,  1.0f, 1.0f, 0.0f,  // bottom left
-        0.85f,  -0.8f, 0.0f,  0.0f, 1.0f, 1.0f   // top 
+        0.6f, -0.6f, 0.0f,  1.0f, 0.0f, 1.0f,  // bottom right
+        0.6f, -0.9f, 0.0f,  1.0f, 1.0f, 0.0f,  // bottom left
+        0.775f,  -0.7f, 0.0f,  0.0f, 1.0f, 1.0f   // top 
     };
     unsigned int indices[] = {  
+        
+        1, 2, 3,  // second triangle
         0, 1, 3, // first triangle
-        1, 2, 3  // second triangle
     };
 
     unsigned int indicesSecond[] = {  
         0, 1, 2, // first triangle
     };
 
-    float texCoords[] = {
-    0.5f, -0.5f,  // lower-left corner  
-    -0.5f, -0.5f,  // lower-right corner
-    0.0f,  0.5f   // top-center corner
-    };
+    // float texCoords[] = {
+    // 0.5f, -0.5f,  // lower-left corner  
+    // -0.5f, -0.5f,  // lower-right corner
+    // 0.0f,  0.5f   // top-center corner
+    // };
 
     unsigned int VBO[2], VAO[2], EBO[2];
     glGenVertexArrays(2, VAO);
@@ -138,14 +141,14 @@ int main()
     glGenTextures(1, &ourTexture_text);
     glBindTexture(GL_TEXTURE_2D, ourTexture_text); 
      // set the texture wrapping parameters
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);	// set texture wrapping to GL_REPEAT (default wrapping method)
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     // set texture filtering parameters
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     // load image, create texture and generate mipmaps
     int width, height, nrChannels;
-
+    stbi_set_flip_vertically_on_load(true);
     unsigned char *data = stbi_load("/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/image/container.jpg", &width, &height, &nrChannels, 0);
     if (data)
     {   
@@ -167,8 +170,7 @@ int main()
     // set texture filtering parameters
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
-
+    // stbi_set_flip_vertically_on_load(true); 
     data = stbi_load("/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/image/awesomeface.png", &width, &height, &nrChannels, 0);
     if (data)
     {
@@ -186,6 +188,7 @@ int main()
     // glBindVertexArray(0);
     ourShader.use();
     glUniform1i(glGetUniformLocation(ourShader.ID, "ourTexture_text"), 0); // set it manually
+    ourShader.setInt("ourTexture_text", 0);
     ourShader.setInt("texture_text2", 1); // or with shader class
 
     // render loop
@@ -196,8 +199,8 @@ int main()
         // -----
         processInput(window);
 
-        // render
-        // ------
+          
+
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
@@ -206,11 +209,30 @@ int main()
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, texture_text2);
 
+
+        
+
         // render the triangle
         ourShader.use();
-        glBindVertexArray(VAO[0]);
+        glm::mat4 trans = glm::mat4(1.0f);
+        trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(1.0f, 1.0f, 1.0f));
+        trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
+        unsigned int transformLoc = glGetUniformLocation(ourShader.ID, "transform_text");
+        glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
+        glBindVertexArray(VAO[0]);        
         // update shader uniform
         
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+        glm::mat4 trans2 = glm::mat4(1.0f);
+        trans2 = glm::translate(trans2, glm::vec3(0.5f, -0.5f, -0.0f));
+        trans2 = glm::rotate(trans2, (float)glfwGetTime(), glm::vec3(1.0f, 1.0f, 1.0f));
+        double  sctimeValue = glfwGetTime();
+        float scaling = static_cast<float>(sin(sctimeValue)/1.0);
+        trans2 = glm::scale(trans2, glm::vec3(scaling,scaling,scaling));  
+
+        unsigned int transformLoc2 = glGetUniformLocation(ourShader.ID, "transform_text");
+        glUniformMatrix4fv(transformLoc2, 1, GL_FALSE, glm::value_ptr(trans2));
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
         // // glDrawArrays(GL_TRIANGLES, 0, 12);
         // glBindVertexArray(VAO[1]);
