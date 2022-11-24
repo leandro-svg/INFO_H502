@@ -18,6 +18,7 @@ public:
 	glm::vec3 position;
 	glm::vec3 orientationZ = glm::vec3(0.0f, 0.0f, -0.1f);
 	glm::vec3 orientationY = glm::vec3(0.0f, 0.1f, 0.0f);
+	glm::vec3 orientationX = glm::vec3(0.1f, 0.0f, 0.0f);
 
 	// Prevents the camera from jumping around when first clicking left click
 	bool firstClick = true;

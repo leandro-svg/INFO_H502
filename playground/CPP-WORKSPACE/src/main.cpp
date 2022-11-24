@@ -1,7 +1,7 @@
 /// Libraries
 #include </home/flo/INFO_H502/playground/CPP-WORKSPACE/include/glad/glad.h>
 #include </home/flo/INFO_H502/playground/CPP-WORKSPACE/include/GLFW/glfw3.h>
-#include </home/flo/INFO_H502/playground/CPP-WORKSPACE/include/stb/stb_image.h>
+// #include </home/flo/INFO_H502/playground/CPP-WORKSPACE/include/stb/stb_image.h>
 #include </home/flo/INFO_H502/playground/CPP-WORKSPACE/include/glm/glm.hpp>
 #include </home/flo/INFO_H502/playground/CPP-WORKSPACE/include/glm/gtc/matrix_transform.hpp>
 #include </home/flo/INFO_H502/playground/CPP-WORKSPACE/include/glm/gtc/type_ptr.hpp>
@@ -17,22 +17,22 @@
 #include "Camera.h"
 
 // Constants
-const unsigned int windowWidth = 800;
-const unsigned int windowHeight = 800;
+const unsigned int windowWidth = 900;
+const unsigned int windowHeight = 900;
 
 // Vertices coordinates (origins of x and y located at the middle of the window)
 GLfloat vertices[] =
 { //     Coordinates     /        Colors         /   Texture Coordinates
-	-0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
-	-0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
-	0.5f, 0.0f, -0.5f,      0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
-	0.5f, 0.0f,  0.5f,      0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
+	-0.5f, -0.5f,  0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
+	-0.5f, -0.5f, -0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
+	0.5f, -0.5f, -0.5f,      0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
+	0.5f, -0.5f,  0.5f,      0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
 	 
 	
-	-0.5f, 1.0f,  0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 5.0f,
-	-0.5f, 1.0f, -0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 5.0f,
-	 0.5f, 1.0f, -0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 5.0f,
-	 0.5f, 1.0f,  0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 5.0f
+	-0.5f, 0.5f,  0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 5.0f,
+	-0.5f, 0.5f, -0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 5.0f,
+	 0.5f, 0.5f, -0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 5.0f,
+	 0.5f, 0.5f,  0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 5.0f
 
 };
 

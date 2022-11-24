@@ -27,7 +27,7 @@ void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shade
 void Camera::Inputs(GLFWwindow* window)
 {
 	// Handles key inputs
-	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) // Zoom in
+	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) // Zoom in
 	{
 		position += speed * orientationZ;
 	}
@@ -35,7 +35,7 @@ void Camera::Inputs(GLFWwindow* window)
 	{
 		position += speed/2 * -glm::normalize(glm::cross(orientationZ, orientationY))/2.0f;
 	}
-	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) // Zoom out
+	if (glfwGetKey(window, GLFW_KEY_RIGHT_SHIFT) == GLFW_PRESS) // Zoom out
 	{
 		position += speed * -orientationZ;
 	}
@@ -58,6 +58,14 @@ void Camera::Inputs(GLFWwindow* window)
 	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) // Rotation right
 	{
 		orientationZ = glm::rotate(orientationZ, glm::radians(0.1f), -orientationY);
+	}
+	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) // Rotation down
+	{
+		orientationZ = glm::rotate(orientationZ, glm::radians(0.1f), -orientationX);
+	}
+	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) // Rotation up
+	{
+		orientationZ = glm::rotate(orientationZ, glm::radians(0.1f), orientationX);
 	}
 	if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS) // Faster
 	{

@@ -1,4 +1,5 @@
 /// Element buffer object class ///
+// Index buffer
 
 /// Headers
 #include"EBO.h"

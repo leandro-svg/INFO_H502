@@ -1,5 +1,6 @@
 /// Vertex Buffer Object class ///
-// VBO to pack object with the vertex data
+// VBO to pack object with the vertex data to send from the CPU to the GPU
+// VBO is an array of references
 
 /// Headers
 #include"VBO.h"

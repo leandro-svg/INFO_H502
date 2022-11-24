@@ -1,6 +1,6 @@
 /// Vertex array object class ///
 // VAO to points to one or more VBOs and tells OpenGL how to interpret them
-// allows to quickly switch between different VBOs
+// Allows to quickly switch between different VBOs
 //ATTENTION: Need to generate the VAO before the VBO
 
 /// Headers
