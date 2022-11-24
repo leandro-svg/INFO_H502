@@ -321,7 +321,7 @@ int main()
         
         
         ourShader.use();
-        ourShader.setVec3("lightColor",  0.0f, 0.0f, 0.0f);
+        ourShader.setVec3("lightColor",  1.0f, 1.0f, 1.0f);
         ourShader.setFloatReal("ambient",  0.1f);
         glm::mat4 trans = glm::mat4(1.0f);
         //trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(1.0f, 1.0f, 1.0f));
