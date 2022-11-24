@@ -1,5 +1,8 @@
 {
     "files.associations": {
-        "glad.h": "c"
+        "glad.h": "c",
+        "*.tcc": "cpp",
+        "istream": "cpp",
+        "ostream": "cpp"
     }
 }

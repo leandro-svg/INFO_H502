@@ -1,3 +1,4 @@
+/// Libraries
 #include </home/flo/INFO_H502/playground/CPP-WORKSPACE/include/glad/glad.h>
 #include </home/flo/INFO_H502/playground/CPP-WORKSPACE/include/GLFW/glfw3.h>
 #include </home/flo/INFO_H502/playground/CPP-WORKSPACE/include/stb/stb_image.h>
@@ -8,44 +9,51 @@
 #include <iostream>
 #include <tgmath.h>
 
+/// Headers
 #include "Texture.h"
 #include "shaderClass.h"
 #include "VAO.h"
 #include "VBO.h"
 #include "EBO.h"
+#include "Camera.h"
 
-const unsigned int width = 800;
-const unsigned int height = 800;
+// Constants
+const unsigned int windowWidth = 800;
+const unsigned int windowHeight = 800;
 
-// Vertices coordinates
-// origins of x and y located at the middle of the window
+// Vertices coordinates (origins of x and y located at the middle of the window)
 GLfloat vertices[] =
-{ //     COORDINATES     /        COLORS      /   TexCoord  //
+{ //     Coordinates     /        Colors         /   Texture Coordinates
 	-0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
 	-0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
-	 0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
-	 0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
-	-0.5f, 0.5f,  0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
-	-0.5f, 0.5f, -0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
-	 0.5f, 0.5f, -0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
-	 0.5f, 0.5f,  0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f
+	0.5f, 0.0f, -0.5f,      0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
+	0.5f, 0.0f,  0.5f,      0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
+	 
+	
+	-0.5f, 1.0f,  0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 5.0f,
+	-0.5f, 1.0f, -0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 5.0f,
+	 0.5f, 1.0f, -0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 5.0f,
+	 0.5f, 1.0f,  0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 5.0f
+
 };
 
-// Indices for vertices order
+// Indices to order the vertices
 GLuint indices[] =
 {
 	0, 1, 2,
 	0, 2, 3,
-	0, 1, 4,
-    0, 4, 3,
-    1, 2, 5,
-    1, 4, 5,
-    2, 5, 6,
-    2, 6, 7,
-	3, 2, 7,
-    3, 4, 7,
-    4, 5, 7,
-    5, 6, 7
+	4, 7, 6,
+	4, 6, 5,
+	0, 1, 5,
+	0, 5, 4,
+	2, 3, 7,
+	2, 7, 6,
+	1, 2, 6,
+	1, 6, 5,
+	3, 0, 4,
+	3, 4, 7,
+
+
 };
 
 
@@ -63,7 +71,7 @@ int main()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	// Create a GLFWwindow object
-	GLFWwindow* window = glfwCreateWindow(width, height, "test", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(windowWidth, windowHeight, "test", NULL, NULL);
 	// Error check if the window fails to create
 	if (window == NULL)
 	{
@@ -78,7 +86,7 @@ int main()
 	gladLoadGL();
 	// Specify the viewport of OpenGL in the Window
 	// In this case the viewport goes from x = 0, y = 0, to x = 800, y = 800
-	glViewport(0, 0, width, height);
+	glViewport(0, 0, windowWidth, windowHeight);
 
 	// Generates Shader object using shaders default.vert and default.frag
 	Shader shaderProgram("default.vert", "default.frag");
@@ -120,6 +128,10 @@ int main()
 	// Enables the Depth Buffer (to not have only 2D)
 	glEnable(GL_DEPTH_TEST);
 
+	// Creates camera object
+	Camera camera(windowWidth, windowHeight, glm::vec3(0.0f, 0.0f, 2.0f));
+
+
 	// Main while loop
 	while (!glfwWindowShouldClose(window))
 	{
@@ -129,36 +141,10 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		// Tell OpenGL which Shader Program we want to use
 		shaderProgram.Activate();
-
-		// Simple timer
-		double crntTime = glfwGetTime();
-		if (crntTime - prevTime >= 1 / 60)
-		{
-			rotation += 0.1f;
-			prevTime = crntTime;
-		}
-
-		// Initializes matrices so they are not the null matrix
-		glm::mat4 model = glm::mat4(1.0f);
-		glm::mat4 view = glm::mat4(1.0f);
-		glm::mat4 proj = glm::mat4(1.0f);
-
-		// Assigns different transformations to each matrix
-		model = glm::rotate(model, glm::radians(rotation), glm::vec3(0.0f, 1.0f, 0.0f)); // around y
-        model = glm::rotate(model, glm::radians(rotation), glm::vec3(1.0f, 0.0f, 0.0f)); // around x
-		view = glm::translate(view, glm::vec3(0.0f, -0.5f, -2.0f));
-		proj = glm::perspective(glm::radians(45.0f), (float)width / height, 0.1f, 100.0f);
-
-		// Outputs the matrices into the Vertex Shader
-		int modelLoc = glGetUniformLocation(shaderProgram.ID, "model");
-		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-		int viewLoc = glGetUniformLocation(shaderProgram.ID, "view");
-		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
-		int projLoc = glGetUniformLocation(shaderProgram.ID, "proj");
-		glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(proj));
-
-		// Assigns a value to the uniform; NOTE: Must always be done after activating the Shader Program
-		glUniform1f(uniID, 0.5f);
+		// Handles camera inputs
+		camera.Inputs(window);
+		// Updates and exports the camera matrix to the Vertex Shader
+		camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix");		
 		// Binds texture so that is appears in rendering
 		brickTex.Bind();
 		// Bind the VAO so OpenGL knows to use it

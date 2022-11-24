@@ -17,6 +17,7 @@
                 "/home/flo/INFO_H502/playground/CPP-WORKSPACE/src/shaderClass.cpp",
                 "/home/flo/INFO_H502/playground/CPP-WORKSPACE/src/stb.cpp",
                 "/home/flo/INFO_H502/playground/CPP-WORKSPACE/src/Texture.cpp",
+                "/home/flo/INFO_H502/playground/CPP-WORKSPACE/src/Camera.cpp",
                 "-L",
                 "/usr/local/lib/",
                 "-lglfw",
