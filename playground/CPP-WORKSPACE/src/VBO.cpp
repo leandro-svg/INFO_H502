@@ -1,13 +1,15 @@
-#include"VBO.h"
-// Vertex Buffer Object class 
+/// Vertex Buffer Object class ///
 // VBO to pack object with the vertex data
 
-// Constructor that generates a Vertex Buffer Object and links it to vertices
+/// Headers
+#include"VBO.h"
+
+// Constructor: Vertex Buffer object creation + vertices linking
 VBO::VBO(GLfloat* vertices, GLsizeiptr size)
 {   
-    // create the buffer object (one 3D object, reference pointing)
+    // Buffer object creation (one 3D object, reference pointing)
 	glGenBuffers(1, &ID);
-    // Binding = makes a certain object the current object
+    // Binding 
 	glBindBuffer(GL_ARRAY_BUFFER, ID);
 	glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
     // Need to specify following to improve the performence
@@ -17,20 +19,17 @@ VBO::VBO(GLfloat* vertices, GLsizeiptr size)
 
     // DRAW : vertices will be modified and be used to draw an image on the screen
 }
-
-// Binds the VBO
+// Binding
 void VBO::Bind()
 {
 	glBindBuffer(GL_ARRAY_BUFFER, ID);
 }
-
-// Unbinds the VBO
+// Unbinding
 void VBO::Unbind()
 {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
-
-// Deletes the VBO
+// Delete
 void VBO::Delete()
 {
 	glDeleteBuffers(1, &ID);

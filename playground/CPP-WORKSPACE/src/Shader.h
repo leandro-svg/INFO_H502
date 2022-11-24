@@ -1,13 +1,15 @@
-#ifndef SHADER_CLASS_H
-#define SHADER_CLASS_H
-// Lets the c++ know not to open up the file twice
+/// Shader object class ///
 
+#ifndef SHADER_CLASS_H // Lets the c++ know not to open up the file twice
+#define SHADER_CLASS_H
+
+/// Libraries
 #include </home/flo/INFO_H502/playground/CPP-WORKSPACE/include/glad/glad.h>
-#include<string>
-#include<fstream>
-#include<sstream>
-#include<iostream>
-#include<cerrno>
+#include <string>
+#include <fstream>
+#include <sstream>
+#include <iostream>
+#include <cerrno>
 
 std::string get_file_contents(const char* filename);
 
@@ -16,15 +18,14 @@ class Shader
 public:
 	// Reference ID of the Shader Program
 	GLuint ID;
-	// Constructor that build the Shader Program from 2 different shaders
+	// Constructor: Shader Program building from 2 different shaders
 	Shader(const char* vertexFile, const char* fragmentFile);
-
-	// Activates the Shader Program
+	// Activation
 	void Activate();
-	// Deletes the Shader Program
+	// Delete
 	void Delete();
 private:
-	// Checks if the different Shaders have compiled properly
+	// Shaders compilation check
 	void compileErrors(unsigned int shader, const char* type);
 };
 #endif

@@ -1,21 +1,24 @@
-#ifndef EBO_CLASS_H
+/// Element buffer object class ///
+
+#ifndef EBO_CLASS_H// Lets the c++ know not to open up the file twice
 #define EBO_CLASS_H
 
+/// Libraries
 #include </home/flo/INFO_H502/playground/CPP-WORKSPACE/include/glad/glad.h>
 
 class EBO
 {
 public:
-	// ID reference of Elements Buffer Object
+	// Elements Buffer Object ID reference  
 	GLuint ID;
-	// Constructor that generates a Elements Buffer Object and links it to indices
+	// Constructor: Elements Buffer object generation + indices linking
 	EBO(GLuint* indices, GLsizeiptr size);
 
-	// Binds the EBO
+	// Binding
 	void Bind();
-	// Unbinds the EBO
+	// Unbinding
 	void Unbind();
-	// Deletes the EBO
+	// Delete
 	void Delete();
 };
 

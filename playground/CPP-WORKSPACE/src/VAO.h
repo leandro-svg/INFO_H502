@@ -1,7 +1,12 @@
-#ifndef VAO_CLASS_H
+/// Vertex array object class ///
+
+#ifndef VAO_CLASS_H// Lets the c++ know not to open up the file twice
 #define VAO_CLASS_H
 
+/// Libraries
 #include </home/flo/INFO_H502/playground/CPP-WORKSPACE/include/glad/glad.h>
+
+/// Headers
 #include"VBO.h"
 
 class VAO
@@ -9,16 +14,15 @@ class VAO
 public:
 	// ID reference for the Vertex Array Object
 	GLuint ID;
-	// Constructor that generates a VAO ID
+	// Constructor: Vertex array object generation 
 	VAO();
-
-	// Links a VBO Attribute such as a position or color to the VAO
+	// VBO Attribute linking such as a position or color to the VAO
 	void LinkAttrib(VBO& VBO, GLuint layout, GLuint numComponents, GLenum type, GLsizeiptr stride, void* offset);
-	// Binds the VAO
+	// Binding
 	void Bind();
-	// Unbinds the VAO
+	// Unbinding
 	void Unbind();
-	// Deletes the VAO
+	// Delete
 	void Delete();
 };
 

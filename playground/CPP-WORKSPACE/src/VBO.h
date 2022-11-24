@@ -1,6 +1,9 @@
-#ifndef VBO_CLASS_H
+/// Vertex Buffer Object class ///
+
+#ifndef VBO_CLASS_H// Lets the c++ know not to open up the file twice
 #define VBO_CLASS_H
 
+/// Libraries
 #include </home/flo/INFO_H502/playground/CPP-WORKSPACE/include/glad/glad.h>
 
 // The VBO is an array of references
@@ -9,14 +12,13 @@ class VBO
 public:
 	// Reference ID of the Vertex Buffer Object
 	GLuint ID;
-	// Constructor that generates a Vertex Buffer Object and links it to vertices
+	// Constructor: Vertex Buffer object creation + vertices linking
 	VBO(GLfloat* vertices, GLsizeiptr size);
-
-	// Binds the VBO
+	// Binding
 	void Bind();
-	// Unbinds the VBO
+	// Unbinding
 	void Unbind();
-	// Deletes the VBO
+	// Delete
 	void Delete();
 };
 

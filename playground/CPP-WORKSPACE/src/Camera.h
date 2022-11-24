@@ -4,12 +4,12 @@
 #include </home/flo/INFO_H502/playground/CPP-WORKSPACE/include/glad/glad.h>
 #include </home/flo/INFO_H502/playground/CPP-WORKSPACE/include/GLFW/glfw3.h>
 #include </home/flo/INFO_H502/playground/CPP-WORKSPACE/include/glm/glm.hpp>
-#include</home/flo/INFO_H502/playground/CPP-WORKSPACE/include/glm//gtc/matrix_transform.hpp>
-#include</home/flo/INFO_H502/playground/CPP-WORKSPACE/include/glm//gtc/type_ptr.hpp>
-#include</home/flo/INFO_H502/playground/CPP-WORKSPACE/include/glm//gtx/rotate_vector.hpp>
-#include</home/flo/INFO_H502/playground/CPP-WORKSPACE/include/glm//gtx/vector_angle.hpp>
+#include </home/flo/INFO_H502/playground/CPP-WORKSPACE/include/glm//gtc/matrix_transform.hpp>
+#include </home/flo/INFO_H502/playground/CPP-WORKSPACE/include/glm//gtc/type_ptr.hpp>
+#include </home/flo/INFO_H502/playground/CPP-WORKSPACE/include/glm//gtx/rotate_vector.hpp>
+#include </home/flo/INFO_H502/playground/CPP-WORKSPACE/include/glm//gtx/vector_angle.hpp>
 
-#include"shaderClass.h"
+#include "Shader.h"
 
 class Camera
 {
