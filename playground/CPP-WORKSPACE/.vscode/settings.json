@@ -26,6 +26,14 @@
         "string_view": "cpp",
         "system_error": "cpp",
         "type_traits": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "array": "cpp",
+        "cstddef": "cpp",
+        "cstring": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "optional": "cpp",
+        "tuple": "cpp",
+        "utility": "cpp"
     }
 }

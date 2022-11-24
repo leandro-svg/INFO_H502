@@ -38,6 +38,7 @@ int main()
     // glfw: initialize and configure
     // ------------------------------
     glfwInit();
+   
     if( !glfwInit() ) {
         fprintf( stderr, "Failed to initialize GLFW\n" );
         return -1;
@@ -45,7 +46,7 @@ int main()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
+    
 #ifdef __APPLE__
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
@@ -291,12 +292,13 @@ int main()
     {
         // input
         // -----
+        
         float currentFrame = static_cast<float>(glfwGetTime());
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
-
+        
         processInput(window);
-
+        
        
        
 
@@ -315,7 +317,7 @@ int main()
 
 
         
-
+        
         // render the triangle
         ourShader.use();
         glm::mat4 trans = glm::mat4(1.0f);
@@ -372,7 +374,7 @@ int main()
         glUniformMatrix4fv(transformLoc3, 1, GL_FALSE, glm::value_ptr(trans3));
         glDrawArrays(GL_TRIANGLES, 0, 36);
         ourShader.setMat4("projectionX", projectionX);
-
+        
         // camera/view transformation
         ourShader.setMat4("viewX", viewX);
         for(unsigned int i = 0; i < 10; i++)
@@ -410,8 +412,10 @@ int main()
         glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
+        
         glfwSwapBuffers(window);
         glfwPollEvents();
+        
     }
 
     // optional: de-allocate all resources once they've outlived their purpose:
@@ -429,8 +433,10 @@ int main()
 // ---------------------------------------------------------------------------------------------------------
 void processInput(GLFWwindow *window)
 {
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
+    
+    // if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+    //     std::cout << "Escape for some reasons11" << std::endl;
+    //     glfwSetWindowShouldClose(window, true);
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
         camera.ProcessKeyboard(FORWARD, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
@@ -439,6 +445,7 @@ void processInput(GLFWwindow *window)
         camera.ProcessKeyboard(LEFT, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         camera.ProcessKeyboard(RIGHT, deltaTime);
+    glfwSetWindowShouldClose(window, false);
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
