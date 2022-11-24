@@ -7,11 +7,11 @@ out vec2 TexCoord_text;
 uniform mat4 transform_text;
 
 uniform mat4 model;
-uniform mat4 viewx;
-uniform mat4 projection;
+uniform mat4 viewX;
+uniform mat4 projectionX;
 
 void main()
 {
-    gl_Position = projection * viewx * model * transform_text * vec4(aPos_text, 1.0f);
+    gl_Position = projectionX * viewX * model * transform_text * vec4(aPos_text, 1.0f);
     TexCoord_text = vec2(aTexCoord_text.x, aTexCoord_text.y);
 } 
