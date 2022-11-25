@@ -331,6 +331,7 @@ int main()
         glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 
         ourShader.use();
+        ourShader.setVec3("viewPos", camera.Position); 
         ourShader.setVec3("lightColor",  1.0f, 1.0f, 1.0f);
         ourShader.setFloatReal("ambient",  0.0f);//sin((float)glfwGetTime()) + 1);
         ourShader.setVec3("lightPos",  lightPos);
@@ -400,7 +401,7 @@ int main()
         
         // camera/view transformation
         ourShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
-        ourShader.setFloatReal("ambient",  0.4f); //sin((float)glfwGetTime()) + 1);
+        ourShader.setFloatReal("ambient",  0.1f); //sin((float)glfwGetTime()) + 1);
         ourShader.setVec3("lightPos", lightPos);  
         ourShader.setMat4("viewX", viewX);
         for(unsigned int i = 0; i < 10; i++)
