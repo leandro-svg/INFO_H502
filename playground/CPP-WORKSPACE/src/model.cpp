@@ -3,7 +3,7 @@
 
 #include <../include/learopengl/shader_m.h>
 #include <../include/learopengl/camera.h>
-// #include <../include/learopengl/model.h>
+#include <../include/learopengl/model.h>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -14,8 +14,8 @@
 
 
 
-#define STB_IMAGE_IMPLEMENTATION
-#include "../include/stb/stb_image.h"
+// #define STB_IMAGE_IMPLEMENTATION
+// #include "../include/stb/stb_image.h"
 
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -35,6 +35,38 @@ bool firstMouse = true;
 // timing
 float deltaTime = 0.0f;	// time between current frame and last frame
 float lastFrame = 0.0f;
+
+unsigned int loadCubemap(vector<std::string> faces)
+{
+    unsigned int textureID;
+    glGenTextures(1, &textureID);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+
+    int width, height, nrChannels;
+    for (unsigned int i = 0; i < faces.size(); i++)
+    {
+        unsigned char *data = stbi_load(faces[i].c_str(), &width, &height, &nrChannels, 0);
+        if (data)
+        {
+            glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 
+                         0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data
+            );
+            stbi_image_free(data);
+        }
+        else
+        {
+            std::cout << "Cubemap tex failed to load at path: " << faces[i] << std::endl;
+            stbi_image_free(data);
+        }
+    }
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+    return textureID;
+} 
 
 int main()
 {
@@ -84,10 +116,21 @@ int main()
     Shader ourShader("./shaders/vertex/3D.vs", "./shaders/fragment/light.fs"); // you can name your shader files however you like
 
     Shader ourShaderSecond("./shaders/vertex/horizontalOffest.vs", "./shaders/fragment/3.3.shader.fs"); // you can name your shader files however you like
+
+    Shader ourShaderThird("./shaders/vertex/model_loading.vs", "./shaders/fragment/model_loading.fs"); // you can name your shader files however you like
     // Shader ourShaderSecond("shaders/vertex/3.3.shader.vs", "./shaders/fragment/simple.fs"); // you can name your shader files however you like
 
+    Shader ourShaderFourth("./shaders/vertex/cubemap.vs", "./shaders/fragment/cubemap.fs"); // you can name your shader files however you like
+
     // GOING 3D
-    
+    Model ourModel("/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/object/backpack.obj");
+
+    Model SecondModel("/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/object/tynanausore.obj");
+
+    Model mapModel("/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/object/map.obj");
+
+    Model tryModel("/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/object/try.obj");
+
     glm::mat4 model = glm::mat4(1.0f);
 
     float vertices[] = {
@@ -96,6 +139,51 @@ int main()
         0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f, 0.0f,  0.0f, -1.0f,  // bottom right
         -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,0.0f,  0.0f, -1.0f,   // bottom left
         -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f , 0.0f,  0.0f, -1.0f,  // top left 
+    };
+
+    float skyboxVertices[] = {
+        // positions          
+        -1.0f,  1.0f, -1.0f,
+        -1.0f, -1.0f, -1.0f,
+        1.0f, -1.0f, -1.0f,
+        1.0f, -1.0f, -1.0f,
+        1.0f,  1.0f, -1.0f,
+        -1.0f,  1.0f, -1.0f,
+
+        -1.0f, -1.0f,  1.0f,
+        -1.0f, -1.0f, -1.0f,
+        -1.0f,  1.0f, -1.0f,
+        -1.0f,  1.0f, -1.0f,
+        -1.0f,  1.0f,  1.0f,
+        -1.0f, -1.0f,  1.0f,
+
+        1.0f, -1.0f, -1.0f,
+        1.0f, -1.0f,  1.0f,
+        1.0f,  1.0f,  1.0f,
+        1.0f,  1.0f,  1.0f,
+        1.0f,  1.0f, -1.0f,
+        1.0f, -1.0f, -1.0f,
+
+        -1.0f, -1.0f,  1.0f,
+        -1.0f,  1.0f,  1.0f,
+        1.0f,  1.0f,  1.0f,
+        1.0f,  1.0f,  1.0f,
+        1.0f, -1.0f,  1.0f,
+        -1.0f, -1.0f,  1.0f,
+
+        -1.0f,  1.0f, -1.0f,
+        1.0f,  1.0f, -1.0f,
+        1.0f,  1.0f,  1.0f,
+        1.0f,  1.0f,  1.0f,
+        -1.0f,  1.0f,  1.0f,
+        -1.0f,  1.0f, -1.0f,
+
+        -1.0f, -1.0f, -1.0f,
+        -1.0f, -1.0f,  1.0f,
+        1.0f, -1.0f, -1.0f,
+        1.0f, -1.0f, -1.0f,
+        -1.0f, -1.0f,  1.0f,
+        1.0f, -1.0f,  1.0f
     };
     float cube[] = {
     -0.5f, -0.5f, -0.5f,  1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,  0.0f, -1.0f,
@@ -240,8 +328,23 @@ int main()
     // note that we update the lamp's position attribute's stride to reflect the updated buffer data
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
+
+
+    
  
     // glBindBuffer(GL_ARRAY_BUFFER, 0); 
+
+    unsigned int skyboxVAO, skyboxVBO;
+    glGenVertexArrays(1, &skyboxVAO);
+    glGenBuffers(1, &skyboxVBO);
+
+    glBindVertexArray(skyboxVAO);
+
+    glBindBuffer(GL_ARRAY_BUFFER, skyboxVBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), skyboxVertices, GL_STATIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    
 
 
     unsigned int ourTexture_text, texture_text2;
@@ -292,6 +395,17 @@ int main()
     }
     stbi_image_free(data);
 
+    vector<std::string> faces
+    {
+        "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/cubemap/posx.jpg",
+        "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/cubemap/negx.jpg",
+        "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/cubemap/negy.jpg",
+        "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/cubemap/posy.jpg",
+        "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/cubemap/posz.jpg",
+        "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/cubemap/negz.jpg"
+    };
+    unsigned int cubemapTexture = loadCubemap(faces); 
+
     // You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
     // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
     // glBindVertexArray(0);
@@ -299,6 +413,15 @@ int main()
     glUniform1i(glGetUniformLocation(ourShader.ID, "ourTexture_text"), 0); // set it manually
     ourShader.setInt("ourTexture_text", 0);
     ourShader.setInt("texture_text2", 1); // or with shader class
+
+    ourShaderThird.use();
+    glUniform1i(glGetUniformLocation(ourShaderThird.ID, "texture_diffuse5"), 1); // set it manually
+
+
+    ourShaderFourth.use();
+    ourShaderFourth.setInt("skyboxY", 0);
+    // ourShaderFourth.use();
+    // glUniform1i(glGetUniformLocation(ourShaderFourth.ID, cubemapTexture), 0); // set it manually
 
     // render loop
     // -----------
@@ -332,6 +455,20 @@ int main()
 
         
         glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
+
+        glDepthMask(GL_FALSE);
+        ourShaderFourth.use();
+        glm::mat4 projectionY = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+        ourShaderFourth.setMat4("projectionY", projectionY);
+
+        // camera/view transformation
+        glm::mat4 viewY = camera.GetViewMatrix();
+        viewY = glm::mat4(glm::mat3(camera.GetViewMatrix())); // remove translation from the view matrix
+        ourShaderFourth.setMat4("viewY", viewY);
+        glBindVertexArray(skyboxVAO);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+        glDepthMask(GL_TRUE);
 
         ourShader.use();
         ourShader.setVec3("viewPos", camera.Position); 
@@ -390,7 +527,7 @@ int main()
         glBindVertexArray(VAO[2]);
         glm::mat4 trans3 = glm::mat4(1.0f);
         trans3 = glm::translate(trans3, lightPos);
-        trans3 = glm::rotate(trans3, 0.0f, glm::vec3(1.0f, 1.0f, 1.0f));
+        trans3 = glm::rotate(trans3, 0.0f, glm::vec3(1.0f, 0.0f, 1.0f));
         ourShader.setVec3("lightColor",  1000.0f, 1000.0f, 1000.0f);
         ourShader.setFloatReal("ambient",  1000.0f);
         
@@ -431,6 +568,45 @@ int main()
 
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
+
+        ourShaderThird.use();
+
+        glm::mat4 projection5 = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+        glm::mat4 view5 = camera.GetViewMatrix();
+        ourShaderThird.setMat4("projection5", projection5);
+        ourShaderThird.setMat4("view5", view5);
+
+        glm::mat4 model5 = glm::mat4(1.0f);
+        ourShaderThird.setVec3("lightColor5",  1.0f, 1.0f, 1.0f);
+        ourShaderThird.setFloatReal("ambient5",  1.0f);
+        glm::mat4 trans4 = glm::mat4(1.0f);
+        trans4 = glm::translate(trans3, glm::vec3(-0.0f, -0.0f, -0.0f));
+        trans4 = glm::rotate(trans4, 0.0f, glm::vec3(1.0f, 1.0f, 1.0f));
+
+        
+        model5 = glm::translate(model5, glm::vec3(2.2f, 1.0f, 2.0f)); // translate it down so it's at the center of the scene
+        model5= glm::scale(model5, glm::vec3(0.005f, 0.005f, 0.005f));	// it's a bit too big for our scene, so scale it down
+        ourShaderThird.setMat4("model5", model5);
+        ourModel.Draw(ourShaderThird);
+
+        glm::mat4 model2 = glm::mat4(1.0f);
+        model2 = glm::translate(model2, glm::vec3(-2.0f, -2.0f, 0.0f)); // translate it down so it's at the center of the scene
+        model2 = glm::scale(model2, glm::vec3(0.005f, 0.005f, 0.005f));	// it's a bit too big for our scene, so scale it down
+        ourShaderThird.setMat4("model5", model2);
+        SecondModel.Draw(ourShaderThird);
+
+        glm::mat4 model3 = glm::mat4(1.0f);
+        model3 = glm::translate(model3, glm::vec3(-2.0f, -2.0f, -4.0f)); // translate it down so it's at the center of the scene
+        model3 = glm::scale(model3, glm::vec3(0.005f, 0.005f, 0.005f));	// it's a bit too big for our scene, so scale it down
+        ourShaderThird.setMat4("model5", model3);
+        mapModel.Draw(ourShaderThird);
+
+        glm::mat4 model4 = glm::mat4(1.0f);
+        model4 = glm::translate(model4, glm::vec3(-2.0f, -2.0f, 4.0f)); // translate it down so it's at the center of the scene
+        model4 = glm::scale(model4, glm::vec3(0.005f, 0.005f, 0.005f));	// it's a bit too big for our scene, so scale it down
+        ourShaderThird.setMat4("model5", model4);
+        tryModel.Draw(ourShaderThird);
+        
         
         ourShaderSecond.use();
 
@@ -517,3 +693,5 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
     camera.ProcessMouseScroll(static_cast<float>(yoffset));
 }
+
+ 
