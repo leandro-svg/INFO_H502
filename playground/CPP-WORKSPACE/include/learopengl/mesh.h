@@ -1,12 +1,12 @@
 #ifndef MESH_H
 #define MESH_H
 
-#include <glad/glad.h> // holds all OpenGL type declarations
+#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/glad/glad.h> // holds all OpenGL type declarations
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include <../include/learopengl/shader_m.h>
+#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/learopengl/shader_m.h>
 
 #include <string>
 #include <vector>

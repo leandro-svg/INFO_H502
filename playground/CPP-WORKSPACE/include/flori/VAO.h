@@ -4,10 +4,10 @@
 #define VAO_CLASS_H
 
 /// Libraries
-#include <../include/glad/glad.h>
+#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/glad/glad.h>
 
 /// Headers
-#include "../include/flori/VBO.h"
+#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/flori/VBO.h>
 
 class VAO
 {

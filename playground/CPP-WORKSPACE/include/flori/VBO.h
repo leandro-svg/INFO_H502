@@ -4,7 +4,7 @@
 #define VBO_CLASS_H
 
 /// Libraries
-#include <../include/glad/glad.h>
+#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/glad/glad.h>
 
 // The VBO is an array of references
 class VBO

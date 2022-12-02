@@ -1,9 +1,12 @@
-#include <../include/glad/glad.h>
-#include <../include/GLFW/glfw3.h>
+#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/glad/glad.h>
+#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/GLFW/glfw3.h>
 
-#include <../include/learopengl/shader_m.h>
-#include <../include/learopengl/camera.h>
-#include <../include/learopengl/model.h>
+#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/learopengl/shader_m.h>
+#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/learopengl/camera.h>
+#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/learopengl/model.h>
+#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/flori/EBO.h>
+#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/flori/VBO.h>
+#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/flori/VAO.h>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -11,9 +14,7 @@
 #include <iostream>
 #include <cmath>
 
-#include <../include/flori/EBO.h>
-#include <../include/flori/VBO.h>
-#include <../include/flori/VAO.h>
+
 
 
 
@@ -268,15 +269,7 @@ int main()
     // 0.0f,  0.5f   // top-center corner
     // };
 
-    unsigned int VBO[3], VAO[3],  lightVAO; // EBO[2],
-    glGenVertexArrays(3, VAO);
-    glGenBuffers(3, VBO);
-    //glGenBuffers(2, EBO);
-    // bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
-    glBindVertexArray(VAO[0]);
 
-    glBindBuffer(GL_ARRAY_BUFFER, VBO[0]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
     VAO VAO1;
 	VAO1.Bind();
@@ -296,44 +289,43 @@ int main()
 	VBO1.Unbind();
 	EBO1.Unbind();
 
-    glBindVertexArray(VAO[1]);
 
-    glBindBuffer(GL_ARRAY_BUFFER, VBO[1]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(verticesSecond), verticesSecond, GL_STATIC_DRAW);
+    VAO VAO2;
+    VAO2.Bind();
+    // Vertex Buffer object creation + linking to the vertices
+	VBO VBO2(verticesSecond, sizeof(verticesSecond));
+    // Element Buffer object creation + linking to the indices
+	EBO EBO2(indicesSecond, sizeof(indicesSecond));
 
+    VAO2.LinkAttrib(VBO2, 0, 3, GL_FLOAT, 6 * sizeof(float), (void*)0);
+	VAO2.LinkAttrib(VBO2, 1, 3, GL_FLOAT, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 
-    EBO EBO2(indicesSecond, sizeof(indicesSecond));
-    // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO[1]);
-    // glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indicesSecond), indicesSecond, GL_STATIC_DRAW);
-    
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
-    glEnableVertexAttribArray(1);
+    VAO2.Unbind();
+	VBO2.Unbind();
+	EBO2.Unbind();
 
-    glBindVertexArray(VAO[2]);
+    VAO VAO3;
+    VAO3.Bind();
+    // Vertex Buffer object creation + linking to the vertices
+	VBO VBO3(cube, sizeof(cube));
+    // Element Buffer object creation + linking to the indices
 
-    glBindBuffer(GL_ARRAY_BUFFER, VBO[2]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(cube), cube, GL_STATIC_DRAW);
+    VAO3.LinkAttrib(VBO3, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
+	VAO3.LinkAttrib(VBO3, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
+    VAO3.LinkAttrib(VBO3, 2, 2, GL_FLOAT, 11 * sizeof(float), (void*)(6 * sizeof(float)));
+    VAO3.LinkAttrib(VBO3, 3, 3, GL_FLOAT, 11 * sizeof(float), (void*)(8 * sizeof(float)));
 
-    // position attribute
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
-    // color attribute
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (void*)(3 * sizeof(float)));
-    glEnableVertexAttribArray(1);
-    //texture attribute
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (void*)(6 * sizeof(float)));
-    glEnableVertexAttribArray(2);  
+    VAO3.Unbind();
+	VBO3.Unbind();
 
-    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 11 * sizeof(float), (void*)(8 * sizeof(float)));
-    glEnableVertexAttribArray(3);  
+   
 
-    unsigned int lightCubeVAO;
+    unsigned int lightCubeVBO, lightCubeVAO;
     glGenVertexArrays(1, &lightCubeVAO);
+     glGenVertexArrays(1, &lightCubeVBO);
     glBindVertexArray(lightCubeVAO);
 
-    glBindBuffer(GL_ARRAY_BUFFER, VBO[2]);
+    glBindBuffer(GL_ARRAY_BUFFER, lightCubeVBO);
     // note that we update the lamp's position attribute's stride to reflect the updated buffer data
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
@@ -501,7 +493,7 @@ int main()
         // camera/view transformation
         glm::mat4 viewX = camera.GetViewMatrix();
         ourShader.setMat4("viewX", viewX);
-        glBindVertexArray(VAO[0]);        
+        VAO1.Bind();        
         // update shader uniform
         
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
@@ -533,7 +525,7 @@ int main()
         // glUniformMatrix4fv(projectionLoc4, 1, GL_FALSE, glm::value_ptr(projection));
 
         //LIGHTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT                
-        glBindVertexArray(VAO[2]);
+        VAO3.Bind();
         glm::mat4 trans3 = glm::mat4(1.0f);
         trans3 = glm::translate(trans3, lightPos);
         trans3 = glm::rotate(trans3, 0.0f, glm::vec3(1.0f, 0.0f, 1.0f));
@@ -620,7 +612,7 @@ int main()
         ourShaderSecond.use();
 
         // camera/view transformation
-        glBindVertexArray(VAO[1]);
+        VAO2.Bind();
         double  timeValue = glfwGetTime();
         float greenValue = static_cast<float>(sin(timeValue)/1.0);
         // int vertexColorLocation = glGetUniformLocation(ourShader.ID, "offset");
@@ -638,10 +630,15 @@ int main()
 
     // optional: de-allocate all resources once they've outlived their purpose:
     // ------------------------------------------------------------------------
-    glDeleteVertexArrays(2, VAO);
-    glDeleteBuffers(2, VBO);
+
     EBO1.Delete();
     EBO2.Delete();
+    VAO1.Delete();
+    VAO2.Delete();
+    VAO3.Delete();
+	VBO1.Delete();
+    VBO2.Delete();
+    VBO3.Delete();
     // glfw: terminate, clearing all previously allocated GLFW resources.
     // ------------------------------------------------------------------
     glfwTerminate();

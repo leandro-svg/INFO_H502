@@ -1,7 +1,7 @@
 #ifndef MODEL_H
 #define MODEL_H
 
-#include <../include/glad/glad.h> 
+#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/glad/glad.h> 
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -10,10 +10,10 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
-#include <../include/learopengl/mesh.h>
-#include <../include/learopengl/shader_m.h>
+#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/learopengl/mesh.h>
+#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/learopengl/shader_m.h>
 #define STB_IMAGE_IMPLEMENTATION
-#include <../include/stb/stb_image.h>
+#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/stb/stb_image.h>
 
 #include <string>
 #include <fstream>

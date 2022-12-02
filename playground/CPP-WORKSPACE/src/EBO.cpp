@@ -2,7 +2,7 @@
 // Index buffer
 
 /// Headers
-#include <../include/flori/EBO.h>
+#include "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/flori/EBO.h"
 
 // Constructor: Elements Buffer object generation + indices linking
 EBO::EBO(GLuint* indices, GLsizeiptr size)

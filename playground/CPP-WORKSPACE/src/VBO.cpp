@@ -1,7 +1,7 @@
 // VBO is an array of references
 
 /// Headers
-#include"../include/flori/VBO.h"
+#include"/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/flori/VBO.h"
 
 // Constructor: Vertex Buffer object creation + vertices linking
 VBO::VBO(GLfloat* vertices, GLsizeiptr size)
