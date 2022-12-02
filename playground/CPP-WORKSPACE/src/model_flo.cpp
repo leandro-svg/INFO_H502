@@ -17,8 +17,6 @@
 
 
 
-
-
 // #define STB_IMAGE_IMPLEMENTATION
 // #include "../include/stb/stb_image.h"
 
@@ -270,37 +268,43 @@ int main()
     // 0.0f,  0.5f   // top-center corner
     // };
 
-    unsigned int VBO[3], VAO[3], EBO[2], lightVAO;
+    unsigned int VBO[3], VAO[3],  lightVAO; // EBO[2],
     glGenVertexArrays(3, VAO);
     glGenBuffers(3, VBO);
-    glGenBuffers(2, EBO);
+    //glGenBuffers(2, EBO);
     // bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
     glBindVertexArray(VAO[0]);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO[0]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO[0]);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+    VAO VAO1;
+	VAO1.Bind();
+	// Vertex Buffer object creation + linking to the vertices
+	VBO VBO1(vertices, sizeof(vertices));
+    // Element Buffer object creation + linking to the indices
+	EBO EBO1(indices, sizeof(indices));
+    
+    // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO[0]);
+    // glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-    // position attribute
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
-    // color attribute
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-    glEnableVertexAttribArray(1);
-    //texture attribute
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-    glEnableVertexAttribArray(2);  
+    VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
+	VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	VAO1.LinkAttrib(VBO1, 2, 2, GL_FLOAT, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 
+    VAO1.Unbind();
+	VBO1.Unbind();
+	EBO1.Unbind();
 
     glBindVertexArray(VAO[1]);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO[1]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(verticesSecond), verticesSecond, GL_STATIC_DRAW);
 
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO[1]);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indicesSecond), indicesSecond, GL_STATIC_DRAW);
+
+    EBO EBO2(indicesSecond, sizeof(indicesSecond));
+    // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO[1]);
+    // glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indicesSecond), indicesSecond, GL_STATIC_DRAW);
     
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
@@ -636,7 +640,8 @@ int main()
     // ------------------------------------------------------------------------
     glDeleteVertexArrays(2, VAO);
     glDeleteBuffers(2, VBO);
-    glDeleteBuffers(2, EBO);
+    EBO1.Delete();
+    EBO2.Delete();
     // glfw: terminate, clearing all previously allocated GLFW resources.
     // ------------------------------------------------------------------
     glfwTerminate();
