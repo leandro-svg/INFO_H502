@@ -14,6 +14,8 @@
                 "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/EBO.cpp",
                 "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/VBO.cpp",
                 "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/VAO.cpp",
+                "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/Shader.cpp",
+                "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/texture.cpp",
                 "-L",
                 "/usr/local/lib/",
                 "-lglfw3",

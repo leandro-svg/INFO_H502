@@ -1,12 +1,14 @@
 #include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/glad/glad.h>
 #include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/GLFW/glfw3.h>
-
-#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/learopengl/shader_m.h>
+#define STB_IMAGE_IMPLEMENTATION
+#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/stb/stb_image.h>
 #include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/learopengl/camera.h>
 #include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/learopengl/model.h>
 #include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/flori/EBO.h>
 #include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/flori/VBO.h>
 #include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/flori/VAO.h>
+#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/flori/Shader.h>
+#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/flori/texture.h>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -85,10 +87,7 @@ int main()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    
-#ifdef __APPLE__
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-#endif
+
 
     // glfw window creation
     // --------------------
@@ -262,24 +261,12 @@ int main()
     glm::vec3(-1.3f,  1.0f, -1.5f)  
     };
 
-
-    // float texCoords[] = {
-    // 0.5f, -0.5f,  // lower-left corner  
-    // -0.5f, -0.5f,  // lower-right corner
-    // 0.0f,  0.5f   // top-center corner
-    // };
-
-
-
-    VAO VAO1;
+    VAO VAO1, VAO2, VAO3, skyboxVAO;
 	VAO1.Bind();
 	// Vertex Buffer object creation + linking to the vertices
 	VBO VBO1(vertices, sizeof(vertices));
     // Element Buffer object creation + linking to the indices
 	EBO EBO1(indices, sizeof(indices));
-    
-    // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO[0]);
-    // glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
     VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
 	VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
@@ -289,8 +276,6 @@ int main()
 	VBO1.Unbind();
 	EBO1.Unbind();
 
-
-    VAO VAO2;
     VAO2.Bind();
     // Vertex Buffer object creation + linking to the vertices
 	VBO VBO2(verticesSecond, sizeof(verticesSecond));
@@ -304,7 +289,6 @@ int main()
 	VBO2.Unbind();
 	EBO2.Unbind();
 
-    VAO VAO3;
     VAO3.Bind();
     // Vertex Buffer object creation + linking to the vertices
 	VBO VBO3(cube, sizeof(cube));
@@ -318,83 +302,19 @@ int main()
     VAO3.Unbind();
 	VBO3.Unbind();
 
-   
 
-    unsigned int lightCubeVBO, lightCubeVAO;
-    glGenVertexArrays(1, &lightCubeVAO);
-     glGenVertexArrays(1, &lightCubeVBO);
-    glBindVertexArray(lightCubeVAO);
+    skyboxVAO.Bind();
+    // Vertex Buffer object creation + linking to the vertices
+	VBO skyboxVBO(skyboxVertices, sizeof(skyboxVertices));
+    // Element Buffer object creation + linking to the indices
 
-    glBindBuffer(GL_ARRAY_BUFFER, lightCubeVBO);
-    // note that we update the lamp's position attribute's stride to reflect the updated buffer data
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
-    glEnableVertexAttribArray(0);
+    skyboxVAO.LinkAttrib(skyboxVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
 
+    skyboxVAO.Unbind();
+	skyboxVBO.Unbind();
 
-    
- 
-    // glBindBuffer(GL_ARRAY_BUFFER, 0); 
-
-    unsigned int skyboxVAO, skyboxVBO;
-    glGenVertexArrays(1, &skyboxVAO);
-    glGenBuffers(1, &skyboxVBO);
-
-    glBindVertexArray(skyboxVAO);
-
-    glBindBuffer(GL_ARRAY_BUFFER, skyboxVBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), skyboxVertices, GL_STATIC_DRAW);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    
-
-
-    unsigned int ourTexture_text, texture_text2;
-    // texture 1
-    // ---------
-    glGenTextures(1, &ourTexture_text);
-    glBindTexture(GL_TEXTURE_2D, ourTexture_text); 
-     // set the texture wrapping parameters
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    // set texture filtering parameters
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    // load image, create texture and generate mipmaps
-    int width, height, nrChannels;
-    stbi_set_flip_vertically_on_load(true);
-    unsigned char *data = stbi_load("/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/image/container.jpg", &width, &height, &nrChannels, 0);
-    if (data)
-    {   
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-        glGenerateMipmap(GL_TEXTURE_2D);
-    }
-    else
-    {
-        std::cout << "Failed to load texture" << std::endl;
-    }
-    stbi_image_free(data);
-    // texture 2
-    // ---------
-    glGenTextures(1, &texture_text2);
-    glBindTexture(GL_TEXTURE_2D, texture_text2);
-    // set the texture wrapping parameters
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// set texture wrapping to GL_REPEAT (default wrapping method)
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    // set texture filtering parameters
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    // stbi_set_flip_vertically_on_load(true); 
-    data = stbi_load("/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/image/awesomeface.png", &width, &height, &nrChannels, 0);
-    if (data)
-    {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-        glGenerateMipmap(GL_TEXTURE_2D);
-    }
-    else
-    {
-        std::cout << "Failed to load texture" << std::endl;
-    }
-    stbi_image_free(data);
+    Texture ourTexture_text("/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/image/container.jpg", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+    Texture texture_text2("/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/image/awesomeface.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 
     vector<std::string> faces
     {
@@ -410,18 +330,18 @@ int main()
     // You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
     // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
     // glBindVertexArray(0);
-    ourShader.use();
+    ourShader.Activate();
     glUniform1i(glGetUniformLocation(ourShader.ID, "ourTexture_text"), 0); // set it manually
     ourShader.setInt("ourTexture_text", 0);
     ourShader.setInt("texture_text2", 1); // or with shader class
 
-    ourShaderThird.use();
+    ourShaderThird.Activate();
     glUniform1i(glGetUniformLocation(ourShaderThird.ID, "texture_diffuse5"), 1); // set it manually
 
 
-    ourShaderFourth.use();
+    ourShaderFourth.Activate();
     ourShaderFourth.setInt("skyboxY", 0);
-    // ourShaderFourth.use();
+    // ourShaderFourth.Activate();
     // glUniform1i(glGetUniformLocation(ourShaderFourth.ID, cubemapTexture), 0); // set it manually
 
     // render loop
@@ -436,11 +356,6 @@ int main()
         lastFrame = currentFrame;
         
         processInput(window);
-        
-       
-       
-
-
         model = glm::rotate(model, 0.0f, glm::vec3(0.5f, 1.0f, 0.0f)); 
         // view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
         
@@ -449,29 +364,29 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, ourTexture_text);
+        ourTexture_text.Bind();
         glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, texture_text2);
-
+        texture_text2.Bind();
 
         
         glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 
         glDepthMask(GL_FALSE);
-        ourShaderFourth.use();
+        ourShaderFourth.Activate();
         glm::mat4 projectionY = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         ourShaderFourth.setMat4("projectionY", projectionY);
+
 
         // camera/view transformation
         glm::mat4 viewY = camera.GetViewMatrix();
         viewY = glm::mat4(glm::mat3(camera.GetViewMatrix())); // remove translation from the view matrix
         ourShaderFourth.setMat4("viewY", viewY);
-        glBindVertexArray(skyboxVAO);
+        skyboxVAO.Bind();
         glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
         glDrawArrays(GL_TRIANGLES, 0, 36);
         glDepthMask(GL_TRUE);
 
-        ourShader.use();
+        ourShader.Activate();
         ourShader.setVec3("viewPos", camera.Position); 
         ourShader.setVec3("lightColor",  1.0f, 1.0f, 1.0f);
         ourShader.setFloatReal("ambient",  0.0f);//sin((float)glfwGetTime()) + 1);
@@ -511,20 +426,6 @@ int main()
         unsigned int transformLoc2 = glGetUniformLocation(ourShader.ID, "transform_text");
         glUniformMatrix4fv(transformLoc2, 1, GL_FALSE, glm::value_ptr(trans2));
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-        // // glDrawArrays(GL_TRIANGLES, 0, 12);
-        // glBindVertexArray(VAO[1]);
-        // ourShaderSecond.use();
-        // glDrawArrays(GL_TRIANGLES, 0, 3);
-        // int modelLoc4 = glGetUniformLocation(ourShader.ID, "model");
-        // glUniformMatrix4fv(modelLoc4, 1, GL_FALSE, glm::value_ptr(model));
-
-        // int viewLoc4 = glGetUniformLocation(ourShader.ID, "view");
-        // glUniformMatrix4fv(viewLoc4, 1, GL_FALSE, glm::value_ptr(view));
-
-        // int projectionLoc4 = glGetUniformLocation(ourShader.ID, "projection");
-        // glUniformMatrix4fv(projectionLoc4, 1, GL_FALSE, glm::value_ptr(projection));
-
-        //LIGHTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT                
         VAO3.Bind();
         glm::mat4 trans3 = glm::mat4(1.0f);
         trans3 = glm::translate(trans3, lightPos);
@@ -570,7 +471,7 @@ int main()
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
 
-        ourShaderThird.use();
+        ourShaderThird.Activate();
 
         glm::mat4 projection5 = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         glm::mat4 view5 = camera.GetViewMatrix();
@@ -609,7 +510,7 @@ int main()
         tryModel.Draw(ourShaderThird);
         
         
-        ourShaderSecond.use();
+        ourShaderSecond.Activate();
 
         // camera/view transformation
         VAO2.Bind();
