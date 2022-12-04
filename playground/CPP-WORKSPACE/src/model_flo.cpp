@@ -331,21 +331,16 @@ int main()
     // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
     // glBindVertexArray(0);
     ourShader.Activate();
-    glUniform1i(glGetUniformLocation(ourShader.ID, "ourTexture_text"), 0); // set it manually
-    ourShader.setInt("ourTexture_text", 0);
-    ourShader.setInt("texture_text2", 1); // or with shader class
+    texture_text2.texUnit(ourShader, "ourTexture_text", 0);
+    texture_text2.texUnit(ourShader, "texture_text2", 1);
 
     ourShaderThird.Activate();
     glUniform1i(glGetUniformLocation(ourShaderThird.ID, "texture_diffuse5"), 1); // set it manually
 
-
     ourShaderFourth.Activate();
     ourShaderFourth.setInt("skyboxY", 0);
-    // ourShaderFourth.Activate();
-    // glUniform1i(glGetUniformLocation(ourShaderFourth.ID, cubemapTexture), 0); // set it manually
+    
 
-    // render loop
-    // -----------
     while (!glfwWindowShouldClose(window))
     {
         // input
