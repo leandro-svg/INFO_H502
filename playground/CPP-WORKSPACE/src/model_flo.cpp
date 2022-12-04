@@ -16,14 +16,6 @@
 #include <iostream>
 #include <cmath>
 
-
-
-
-
-// #define STB_IMAGE_IMPLEMENTATION
-// #include "../include/stb/stb_image.h"
-
-
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
@@ -114,24 +106,15 @@ int main()
     glEnable(GL_DEPTH_TEST);  
     
 
-    // build and compile our shader program
-    // ------------------------------------
     Shader ourShader("./shaders/vertex/3D.vs", "./shaders/fragment/light.fs"); // you can name your shader files however you like
-
     Shader ourShaderSecond("./shaders/vertex/horizontalOffest.vs", "./shaders/fragment/3.3.shader.fs"); // you can name your shader files however you like
-
     Shader ourShaderThird("./shaders/vertex/model_loading.vs", "./shaders/fragment/model_loading.fs"); // you can name your shader files however you like
-    // Shader ourShaderSecond("shaders/vertex/3.3.shader.vs", "./shaders/fragment/simple.fs"); // you can name your shader files however you like
-
     Shader ourShaderFourth("./shaders/vertex/cubemap.vs", "./shaders/fragment/cubemap.fs"); // you can name your shader files however you like
 
-    // GOING 3D
+  
     Model ourModel("/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/object/backpack.obj");
-
     Model SecondModel("/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/object/tynanausore.obj");
-
     Model mapModel("/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/object/map.obj");
-
     Model tryModel("/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/object/try.obj");
 
     glm::mat4 model = glm::mat4(1.0f);
@@ -239,7 +222,6 @@ int main()
         0.775f,  -0.7f, 0.0f,  0.0f, 1.0f, 1.0f   // top 
     };
     unsigned int indices[] = {  
-        
         1, 2, 3,  // second triangle
         0, 1, 3, // first triangle
     };
@@ -277,9 +259,7 @@ int main()
 	EBO1.Unbind();
 
     VAO2.Bind();
-    // Vertex Buffer object creation + linking to the vertices
 	VBO VBO2(verticesSecond, sizeof(verticesSecond));
-    // Element Buffer object creation + linking to the indices
 	EBO EBO2(indicesSecond, sizeof(indicesSecond));
 
     VAO2.LinkAttrib(VBO2, 0, 3, GL_FLOAT, 6 * sizeof(float), (void*)0);
@@ -290,9 +270,7 @@ int main()
 	EBO2.Unbind();
 
     VAO3.Bind();
-    // Vertex Buffer object creation + linking to the vertices
 	VBO VBO3(cube, sizeof(cube));
-    // Element Buffer object creation + linking to the indices
 
     VAO3.LinkAttrib(VBO3, 0, 3, GL_FLOAT, 11 * sizeof(float), (void*)0);
 	VAO3.LinkAttrib(VBO3, 1, 3, GL_FLOAT, 11 * sizeof(float), (void*)(3 * sizeof(float)));
@@ -304,9 +282,7 @@ int main()
 
 
     skyboxVAO.Bind();
-    // Vertex Buffer object creation + linking to the vertices
 	VBO skyboxVBO(skyboxVertices, sizeof(skyboxVertices));
-    // Element Buffer object creation + linking to the indices
 
     skyboxVAO.LinkAttrib(skyboxVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
 
@@ -327,9 +303,6 @@ int main()
     };
     unsigned int cubemapTexture = loadCubemap(faces); 
 
-    // You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
-    // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
-    // glBindVertexArray(0);
     ourShader.Activate();
     texture_text2.texUnit(ourShader, "ourTexture_text", 0);
     texture_text2.texUnit(ourShader, "texture_text2", 1);
@@ -343,16 +316,12 @@ int main()
 
     while (!glfwWindowShouldClose(window))
     {
-        // input
-        // -----
-        
         float currentFrame = static_cast<float>(glfwGetTime());
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
         
         processInput(window);
         model = glm::rotate(model, 0.0f, glm::vec3(0.5f, 1.0f, 0.0f)); 
-        // view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
         
 
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
@@ -374,7 +343,7 @@ int main()
 
         // camera/view transformation
         glm::mat4 viewY = camera.GetViewMatrix();
-        viewY = glm::mat4(glm::mat3(camera.GetViewMatrix())); // remove translation from the view matrix
+        viewY = glm::mat4(glm::mat3(camera.GetViewMatrix()));
         ourShaderFourth.setMat4("viewY", viewY);
         skyboxVAO.Bind();
         glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
@@ -384,10 +353,10 @@ int main()
         ourShader.Activate();
         ourShader.setVec3("viewPos", camera.Position); 
         ourShader.setVec3("lightColor",  1.0f, 1.0f, 1.0f);
-        ourShader.setFloatReal("ambient",  0.0f);//sin((float)glfwGetTime()) + 1);
+        ourShader.setFloatReal("ambient",  0.0f);
         ourShader.setVec3("lightPos",  lightPos);
         glm::mat4 trans = glm::mat4(1.0f);
-        //trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(1.0f, 1.0f, 1.0f));
+        
         trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(1.0f, 1.0f, 1.0f));
         trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
         unsigned int transformLoc = glGetUniformLocation(ourShader.ID, "transform_text");
@@ -396,15 +365,12 @@ int main()
         int modelLoc = glGetUniformLocation(ourShader.ID, "model");
         glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
-        // pass projection matrix to shader (note that in this case it could change every frame)
         glm::mat4 projectionX = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         ourShader.setMat4("projectionX", projectionX);
 
-        // camera/view transformation
         glm::mat4 viewX = camera.GetViewMatrix();
         ourShader.setMat4("viewX", viewX);
         VAO1.Bind();        
-        // update shader uniform
         
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
@@ -435,8 +401,7 @@ int main()
 
 
         ourShader.setMat4("projectionX", projectionX);
-        
-        // camera/view transformation
+
         ourShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
         ourShader.setFloatReal("ambient",  0.1f); //sin((float)glfwGetTime()) + 1);
         ourShader.setVec3("lightPos", lightPos);  
@@ -511,21 +476,16 @@ int main()
         VAO2.Bind();
         double  timeValue = glfwGetTime();
         float greenValue = static_cast<float>(sin(timeValue)/1.0);
-        // int vertexColorLocation = glGetUniformLocation(ourShader.ID, "offset");
-        // glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
+
         ourShaderSecond.setFloat("offset", greenValue);
         glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
-        // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
-        // -------------------------------------------------------------------------------
-        
+  
         glfwSwapBuffers(window);
         glfwPollEvents();
         glfwSwapInterval(1);
         
     }
 
-    // optional: de-allocate all resources once they've outlived their purpose:
-    // ------------------------------------------------------------------------
 
     EBO1.Delete();
     EBO2.Delete();
@@ -535,20 +495,15 @@ int main()
 	VBO1.Delete();
     VBO2.Delete();
     VBO3.Delete();
-    // glfw: terminate, clearing all previously allocated GLFW resources.
-    // ------------------------------------------------------------------
+
     glfwTerminate();
     return 0;
 }
 
-// process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
-// ---------------------------------------------------------------------------------------------------------
+
 void processInput(GLFWwindow *window)
 {
     
-    // if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-    //     std::cout << "Escape for some reasons11" << std::endl;
-    //     glfwSetWindowShouldClose(window, true);
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
         camera.ProcessKeyboard(FORWARD, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
@@ -560,12 +515,9 @@ void processInput(GLFWwindow *window)
     glfwSetWindowShouldClose(window, false);
 }
 
-// glfw: whenever the window size changed (by OS or user resize) this callback function executes
-// ---------------------------------------------------------------------------------------------
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
-    // make sure the viewport matches the new window dimensions; note that width and 
-    // height will be significantly larger than specified on retina displays.
     glViewport(0, 0, width, height);
 }
 
@@ -590,8 +542,7 @@ void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
     camera.ProcessMouseMovement(xoffset, yoffset);
 }
 
-// glfw: whenever the mouse scroll wheel scrolls, this callback is called
-// ----------------------------------------------------------------------
+
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
     camera.ProcessMouseScroll(static_cast<float>(yoffset));
