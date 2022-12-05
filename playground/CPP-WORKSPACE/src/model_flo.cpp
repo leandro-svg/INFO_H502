@@ -1,14 +1,14 @@
-#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/glad/glad.h>
-#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/GLFW/glfw3.h>
+#include <../include/glad/glad.h>
+#include <../include/GLFW/glfw3.h>
 #define STB_IMAGE_IMPLEMENTATION
-#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/stb/stb_image.h>
-#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/learopengl/Camera.h>
-#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/learopengl/model.h>
-#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/flori/EBO.h>
-#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/flori/VBO.h>
-#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/flori/VAO.h>
-#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/flori/Shader.h>
-#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/flori/texture.h>
+#include <../include/stb/stb_image.h>
+#include <../include/learopengl/Camera.h>
+#include <../include/learopengl/model.h>
+#include <../include/flori/EBO.h>
+#include <../include/flori/VBO.h>
+#include <../include/flori/VAO.h>
+#include <../include/flori/Shader.h>
+#include <../include/flori/texture.h>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>

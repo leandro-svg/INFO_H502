@@ -5,7 +5,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/flori/Shader.h>
+#include <../include/flori/Shader.h>
 #include <string>
 #include <vector>
 using namespace std;

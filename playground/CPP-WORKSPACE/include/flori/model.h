@@ -1,8 +1,8 @@
 #ifndef MODEL_CLASS_H
 #define MODEL_CLASS_H
 
-#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/json/json.h>
-#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/flori/mesh.h>
+#include <../include/json/json.h>
+#include <../include/flori/mesh.h>
 
 using json = nlohmann::json;
 

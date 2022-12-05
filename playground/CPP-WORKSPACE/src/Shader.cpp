@@ -1,7 +1,7 @@
 /// Shader object class ///
 
 /// Headers
-#include"/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/flori/Shader.h"
+#include"../include/flori/Shader.h"
 
 // Reads a text file and outputs a string with everything in the text file
 std::string get_file_contents(const char* filename)

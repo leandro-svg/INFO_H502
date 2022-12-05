@@ -1,8 +1,8 @@
 /// Texture object class ///
 
 /// Headers
-#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/flori/texture.h>
-#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/stb/stb_image.h>
+#include <../include/flori/texture.h>
+#include <../include/stb/stb_image.h>
 // Constructor: Texture object generation
 Texture::Texture(const char* image, GLenum texType, GLenum slot, GLenum format, GLenum pixelType)
 {

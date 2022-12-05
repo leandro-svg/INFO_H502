@@ -9,7 +9,7 @@
 #include<glm/gtx/rotate_vector.hpp>
 #include<glm/gtx/vector_angle.hpp>
 
-#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/flori/Shader.h>
+#include <../include/flori/Shader.h>
 class Camera
 {
 public:

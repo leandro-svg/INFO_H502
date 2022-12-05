@@ -9,14 +9,14 @@
                 "-std=c++17",
                 "-I./include",
                 "-L./lib",
-                "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/glad.c",
-                "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/model_flo.cpp",
-                "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/EBO.cpp",
-                "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/VBO.cpp",
-                "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/VAO.cpp",
-                "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/Shader.cpp",
-                "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/texture.cpp",
-                "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/Camera.cpp",
+                "./src/glad.c",
+                "./src/model_flo.cpp",
+                "./src/EBO.cpp",
+                "./src/VBO.cpp",
+                "./src/VAO.cpp",
+                "./src/Shader.cpp",
+                "./src/texture.cpp",
+                "./src/Camera.cpp",
                 // "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/mesh.cpp",
                 // "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/model.cpp",
                 "-L",
@@ -29,7 +29,7 @@
                 "-lassimp",
             ],
             "options": {
-                "cwd": "${fileDirname}"
+                "cwd": "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/"
             },
             "problemMatcher": [
                 "$gcc"

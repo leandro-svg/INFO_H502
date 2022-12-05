@@ -1,4 +1,4 @@
-#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/flori/mesh.h>
+#include <../include/flori/mesh.h>
 
 Mesh::Mesh(std::vector <Vertex>& vertices, std::vector <GLuint>& indices, std::vector <Texture>& textures)
 {

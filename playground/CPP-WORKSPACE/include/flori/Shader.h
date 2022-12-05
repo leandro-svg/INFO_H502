@@ -4,7 +4,7 @@
 #define SHADER_CLASS_H
 
 /// Libraries
-#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/glad/glad.h>
+#include <../include/glad/glad.h>
 #include <string>
 #include <fstream>
 #include <sstream>

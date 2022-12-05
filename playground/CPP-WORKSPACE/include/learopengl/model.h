@@ -10,8 +10,8 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
-#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/learopengl/mesh.h>
-#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/flori/Shader.h>
+#include <../include/learopengl/mesh.h>
+#include <../include/flori/Shader.h>
 
 
 #include <string>

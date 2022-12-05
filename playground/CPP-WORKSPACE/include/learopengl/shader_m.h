@@ -1,8 +1,8 @@
 #ifndef SHADER_H
 #define SHADER_H
 
-#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/glad/glad.h>
-#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/GLFW/glfw3.h>
+#include <../include/glad/glad.h>
+#include <../include/GLFW/glfw3.h>
 #include <glm/glm.hpp>
 
 #include <string>

@@ -1,4 +1,4 @@
-#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/flori/model.h>
+#include <../include/flori/model.h>
 
 Model::Model(const char* file)
 {

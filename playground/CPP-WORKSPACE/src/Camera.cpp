@@ -1,7 +1,7 @@
 
-#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/learopengl/Camera.h>
+#include <../include/learopengl/Camera.h>
 #include <glm/glm.hpp>
-#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/glad/glad.h>
+#include <../include/glad/glad.h>
 
 #include <glm/gtc/matrix_transform.hpp>
 

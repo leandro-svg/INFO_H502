@@ -4,7 +4,7 @@
 //ATTENTION: Need to generate the VAO before the VBO
 
 /// Headers
-#include "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/flori/VAO.h"
+#include <../include/flori/VAO.h>
 
 // Constructor: Vertex array object generation 
 VAO::VAO()

@@ -3,10 +3,10 @@
 
 #include<string>
 
-#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/flori/VAO.h>
-#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/flori/EBO.h>
-#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/learopengl/camera.h> 
-#include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/flori/texture.h> 
+#include <../include/flori/VAO.h>
+#include <../include/flori/EBO.h>
+#include <../include/learopengl/camera.h> 
+#include <../include/flori/texture.h> 
 
 class Mesh
 {
