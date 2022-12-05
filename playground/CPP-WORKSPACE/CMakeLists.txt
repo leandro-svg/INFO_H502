@@ -20,7 +20,7 @@ file(GLOB  HEADER_FILES
 configure_file(src/helpers/RootDir.h.in src/helpers/RootDir.h)
 include_directories(${CMAKE_BINARY_DIR}/src)
 
-set(PROJECT "src/main.cpp" "src/Camera.cpp" "src/EBO.cpp" "src/glad.c" "src/Shader.cpp" "src/texture.cpp" "src/VAO.cpp" "src/VBO.cpp" "include/flori/EBO.h" "include/flori/Shader.h" "include/flori/texture.h" "include/flori/VAO.h" "include/flori/VBO.h" "include/learopengl/Camera.h" "include/learopengl/mesh.h" "include/learopengl/model.h")
+set(PROJECT ${HEADER_FILES} ${SOURCE_FILES})
 # Define the executable
 add_compile_definitions(PATH_TO_OBJECTS="${CMAKE_CURRENT_SOURCE_DIR}/object")
 add_compile_definitions(PATH_TO_TEXTURE="${CMAKE_CURRENT_SOURCE_DIR}/image")
