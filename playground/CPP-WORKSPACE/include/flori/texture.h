@@ -6,7 +6,7 @@
 // #include </home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/stb/stb_image.h>
 
 /// Headers
-#include "../include/flori/Shader.h"
+#include <../include/flori/Shader.h>
 
 class Texture
 {
