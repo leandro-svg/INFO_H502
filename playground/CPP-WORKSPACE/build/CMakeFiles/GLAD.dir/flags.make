@@ -4,7 +4,7 @@
 # compile C with /usr/bin/cc
 C_FLAGS =  
 
-C_DEFINES = 
+C_DEFINES = -DPATH_TO_OBJECTS=\"/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/object\" -DPATH_TO_TEXTURE=\"/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/image\"
 
 C_INCLUDES = -I/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/build/src -I/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src -I/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include -I/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/glad -I/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/GLFW -I/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/json -I/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/KHR -I/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/include/stb 
 

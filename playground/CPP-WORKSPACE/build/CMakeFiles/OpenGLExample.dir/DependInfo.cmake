@@ -9,6 +9,12 @@ set(CMAKE_DEPENDS_CHECK_C
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 
+# Preprocessor definitions for this target.
+set(CMAKE_TARGET_DEFINITIONS_C
+  "PATH_TO_OBJECTS=\"/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/object\""
+  "PATH_TO_TEXTURE=\"/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/image\""
+  )
+
 # The include file search paths:
 set(CMAKE_C_TARGET_INCLUDE_PATH
   "src"
@@ -30,6 +36,12 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/texture.cpp" "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/build/CMakeFiles/OpenGLExample.dir/src/texture.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
+
+# Preprocessor definitions for this target.
+set(CMAKE_TARGET_DEFINITIONS_CXX
+  "PATH_TO_OBJECTS=\"/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/object\""
+  "PATH_TO_TEXTURE=\"/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/image\""
+  )
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH

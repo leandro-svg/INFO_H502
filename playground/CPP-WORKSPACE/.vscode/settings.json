@@ -35,6 +35,14 @@
         "optional": "cpp",
         "tuple": "cpp",
         "utility": "cpp",
-        "cerrno": "cpp"
+        "cerrno": "cpp",
+        "bit": "cpp",
+        "deque": "cpp",
+        "forward_list": "cpp",
+        "map": "cpp",
+        "functional": "cpp",
+        "memory": "cpp",
+        "numeric": "cpp",
+        "valarray": "cpp"
     }
 }

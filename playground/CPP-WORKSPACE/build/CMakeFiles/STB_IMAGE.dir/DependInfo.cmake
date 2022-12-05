@@ -8,6 +8,12 @@ set(CMAKE_DEPENDS_CHECK_CXX
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
+# Preprocessor definitions for this target.
+set(CMAKE_TARGET_DEFINITIONS_CXX
+  "PATH_TO_OBJECTS=\"/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/object\""
+  "PATH_TO_TEXTURE=\"/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/image\""
+  )
+
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "src"

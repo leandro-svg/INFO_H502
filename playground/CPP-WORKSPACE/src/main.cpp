@@ -80,7 +80,6 @@ int main()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-
     // glfw window creation
     // --------------------
     GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", NULL, NULL);
@@ -105,13 +104,11 @@ int main()
     }
     glEnable(GL_DEPTH_TEST);  
     
+    Shader ourShader("../shaders/vertex/3D.vs", "../shaders/fragment/light.fs"); // you can name your shader files however you like
+    Shader ourShaderSecond("../shaders/vertex/horizontalOffest.vs", "../shaders/fragment/3.3.shader.fs"); // you can name your shader files however you like
+    Shader ourShaderThird("../shaders/vertex/model_loading.vs", "../shaders/fragment/model_loading.fs"); // you can name your shader files however you like
+    Shader ourShaderFourth("../shaders/vertex/cubemap.vs", "../shaders/fragment/cubemap.fs"); // you can name your shader files however you like
 
-    Shader ourShader("./shaders/vertex/3D.vs", "./shaders/fragment/light.fs"); // you can name your shader files however you like
-    Shader ourShaderSecond("./shaders/vertex/horizontalOffest.vs", "./shaders/fragment/3.3.shader.fs"); // you can name your shader files however you like
-    Shader ourShaderThird("./shaders/vertex/model_loading.vs", "./shaders/fragment/model_loading.fs"); // you can name your shader files however you like
-    Shader ourShaderFourth("./shaders/vertex/cubemap.vs", "./shaders/fragment/cubemap.fs"); // you can name your shader files however you like
-
-  
     Model ourModel("/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/object/backpack.obj");
     Model SecondModel("/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/object/tynanausore.obj");
     Model mapModel("/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/object/map.obj");
@@ -288,7 +285,6 @@ int main()
 
     skyboxVAO.Unbind();
 	skyboxVBO.Unbind();
-
     Texture ourTexture_text("/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/image/container.jpg", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
     Texture texture_text2("/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/image/awesomeface.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 
@@ -312,7 +308,6 @@ int main()
 
     ourShaderFourth.Activate();
     ourShaderFourth.setInt("skyboxY", 0);
-    
 
     while (!glfwWindowShouldClose(window))
     {
@@ -323,7 +318,6 @@ int main()
         processInput(window);
         model = glm::rotate(model, 0.0f, glm::vec3(0.5f, 1.0f, 0.0f)); 
         
-
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -356,7 +350,6 @@ int main()
         ourShader.setFloatReal("ambient",  0.0f);
         ourShader.setVec3("lightPos",  lightPos);
         glm::mat4 trans = glm::mat4(1.0f);
-        
         trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(1.0f, 1.0f, 1.0f));
         trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
         unsigned int transformLoc = glGetUniformLocation(ourShader.ID, "transform_text");
@@ -401,7 +394,6 @@ int main()
 
 
         ourShader.setMat4("projectionX", projectionX);
-
         ourShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
         ourShader.setFloatReal("ambient",  0.1f); //sin((float)glfwGetTime()) + 1);
         ourShader.setVec3("lightPos", lightPos);  
@@ -450,7 +442,6 @@ int main()
         model5= glm::scale(model5, glm::vec3(0.005f, 0.005f, 0.005f));	// it's a bit too big for our scene, so scale it down
         ourShaderThird.setMat4("model5", model5);
         ourModel.Draw(ourShaderThird);
-
         glm::mat4 model2 = glm::mat4(1.0f);
         model2 = glm::translate(model2, glm::vec3(-2.0f, -2.0f, 0.0f)); // translate it down so it's at the center of the scene
         model2 = glm::scale(model2, glm::vec3(0.005f, 0.005f, 0.005f));	// it's a bit too big for our scene, so scale it down
@@ -479,11 +470,9 @@ int main()
 
         ourShaderSecond.setFloat("offset", greenValue);
         glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
-  
         glfwSwapBuffers(window);
         glfwPollEvents();
         glfwSwapInterval(1);
-        
     }
 
 
@@ -495,7 +484,7 @@ int main()
 	VBO1.Delete();
     VBO2.Delete();
     VBO3.Delete();
-
+    std::cout << "k13" << std::endl;
     glfwTerminate();
     return 0;
 }
