@@ -1,5 +1,0 @@
-/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/build/CMakeFiles/rebuild_cache.dir
-/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/build/CMakeFiles/edit_cache.dir
-/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/build/CMakeFiles/GLAD.dir
-/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/build/CMakeFiles/STB_IMAGE.dir
-/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/build/CMakeFiles/OpenGLExample.dir
