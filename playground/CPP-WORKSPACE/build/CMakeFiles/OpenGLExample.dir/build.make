@@ -96,9 +96,22 @@ CMakeFiles/OpenGLExample.dir/src/EBO.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/OpenGLExample.dir/src/EBO.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/EBO.cpp -o CMakeFiles/OpenGLExample.dir/src/EBO.cpp.s
 
+CMakeFiles/OpenGLExample.dir/src/glad.c.o: CMakeFiles/OpenGLExample.dir/flags.make
+CMakeFiles/OpenGLExample.dir/src/glad.c.o: ../src/glad.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/OpenGLExample.dir/src/glad.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/OpenGLExample.dir/src/glad.c.o   -c /home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/glad.c
+
+CMakeFiles/OpenGLExample.dir/src/glad.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/OpenGLExample.dir/src/glad.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/glad.c > CMakeFiles/OpenGLExample.dir/src/glad.c.i
+
+CMakeFiles/OpenGLExample.dir/src/glad.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/OpenGLExample.dir/src/glad.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/glad.c -o CMakeFiles/OpenGLExample.dir/src/glad.c.s
+
 CMakeFiles/OpenGLExample.dir/src/Shader.cpp.o: CMakeFiles/OpenGLExample.dir/flags.make
 CMakeFiles/OpenGLExample.dir/src/Shader.cpp.o: ../src/Shader.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/OpenGLExample.dir/src/Shader.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/OpenGLExample.dir/src/Shader.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OpenGLExample.dir/src/Shader.cpp.o -c /home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/Shader.cpp
 
 CMakeFiles/OpenGLExample.dir/src/Shader.cpp.i: cmake_force
@@ -109,9 +122,22 @@ CMakeFiles/OpenGLExample.dir/src/Shader.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/OpenGLExample.dir/src/Shader.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/Shader.cpp -o CMakeFiles/OpenGLExample.dir/src/Shader.cpp.s
 
+CMakeFiles/OpenGLExample.dir/src/texture.cpp.o: CMakeFiles/OpenGLExample.dir/flags.make
+CMakeFiles/OpenGLExample.dir/src/texture.cpp.o: ../src/texture.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/OpenGLExample.dir/src/texture.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OpenGLExample.dir/src/texture.cpp.o -c /home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/texture.cpp
+
+CMakeFiles/OpenGLExample.dir/src/texture.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/OpenGLExample.dir/src/texture.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/texture.cpp > CMakeFiles/OpenGLExample.dir/src/texture.cpp.i
+
+CMakeFiles/OpenGLExample.dir/src/texture.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/OpenGLExample.dir/src/texture.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/texture.cpp -o CMakeFiles/OpenGLExample.dir/src/texture.cpp.s
+
 CMakeFiles/OpenGLExample.dir/src/VAO.cpp.o: CMakeFiles/OpenGLExample.dir/flags.make
 CMakeFiles/OpenGLExample.dir/src/VAO.cpp.o: ../src/VAO.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/OpenGLExample.dir/src/VAO.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/OpenGLExample.dir/src/VAO.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OpenGLExample.dir/src/VAO.cpp.o -c /home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/VAO.cpp
 
 CMakeFiles/OpenGLExample.dir/src/VAO.cpp.i: cmake_force
@@ -124,7 +150,7 @@ CMakeFiles/OpenGLExample.dir/src/VAO.cpp.s: cmake_force
 
 CMakeFiles/OpenGLExample.dir/src/VBO.cpp.o: CMakeFiles/OpenGLExample.dir/flags.make
 CMakeFiles/OpenGLExample.dir/src/VBO.cpp.o: ../src/VBO.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/OpenGLExample.dir/src/VBO.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/OpenGLExample.dir/src/VBO.cpp.o"
 	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OpenGLExample.dir/src/VBO.cpp.o -c /home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/VBO.cpp
 
 CMakeFiles/OpenGLExample.dir/src/VBO.cpp.i: cmake_force
@@ -135,42 +161,16 @@ CMakeFiles/OpenGLExample.dir/src/VBO.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/OpenGLExample.dir/src/VBO.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/VBO.cpp -o CMakeFiles/OpenGLExample.dir/src/VBO.cpp.s
 
-CMakeFiles/OpenGLExample.dir/src/glad.c.o: CMakeFiles/OpenGLExample.dir/flags.make
-CMakeFiles/OpenGLExample.dir/src/glad.c.o: ../src/glad.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/OpenGLExample.dir/src/glad.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/OpenGLExample.dir/src/glad.c.o   -c /home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/glad.c
-
-CMakeFiles/OpenGLExample.dir/src/glad.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/OpenGLExample.dir/src/glad.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/glad.c > CMakeFiles/OpenGLExample.dir/src/glad.c.i
-
-CMakeFiles/OpenGLExample.dir/src/glad.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/OpenGLExample.dir/src/glad.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/glad.c -o CMakeFiles/OpenGLExample.dir/src/glad.c.s
-
-CMakeFiles/OpenGLExample.dir/src/texture.cpp.o: CMakeFiles/OpenGLExample.dir/flags.make
-CMakeFiles/OpenGLExample.dir/src/texture.cpp.o: ../src/texture.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/OpenGLExample.dir/src/texture.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/OpenGLExample.dir/src/texture.cpp.o -c /home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/texture.cpp
-
-CMakeFiles/OpenGLExample.dir/src/texture.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/OpenGLExample.dir/src/texture.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/texture.cpp > CMakeFiles/OpenGLExample.dir/src/texture.cpp.i
-
-CMakeFiles/OpenGLExample.dir/src/texture.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/OpenGLExample.dir/src/texture.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/src/texture.cpp -o CMakeFiles/OpenGLExample.dir/src/texture.cpp.s
-
 # Object files for target OpenGLExample
 OpenGLExample_OBJECTS = \
 "CMakeFiles/OpenGLExample.dir/src/main.cpp.o" \
 "CMakeFiles/OpenGLExample.dir/src/Camera.cpp.o" \
 "CMakeFiles/OpenGLExample.dir/src/EBO.cpp.o" \
-"CMakeFiles/OpenGLExample.dir/src/Shader.cpp.o" \
-"CMakeFiles/OpenGLExample.dir/src/VAO.cpp.o" \
-"CMakeFiles/OpenGLExample.dir/src/VBO.cpp.o" \
 "CMakeFiles/OpenGLExample.dir/src/glad.c.o" \
-"CMakeFiles/OpenGLExample.dir/src/texture.cpp.o"
+"CMakeFiles/OpenGLExample.dir/src/Shader.cpp.o" \
+"CMakeFiles/OpenGLExample.dir/src/texture.cpp.o" \
+"CMakeFiles/OpenGLExample.dir/src/VAO.cpp.o" \
+"CMakeFiles/OpenGLExample.dir/src/VBO.cpp.o"
 
 # External object files for target OpenGLExample
 OpenGLExample_EXTERNAL_OBJECTS =
@@ -178,11 +178,11 @@ OpenGLExample_EXTERNAL_OBJECTS =
 OpenGLExample: CMakeFiles/OpenGLExample.dir/src/main.cpp.o
 OpenGLExample: CMakeFiles/OpenGLExample.dir/src/Camera.cpp.o
 OpenGLExample: CMakeFiles/OpenGLExample.dir/src/EBO.cpp.o
+OpenGLExample: CMakeFiles/OpenGLExample.dir/src/glad.c.o
 OpenGLExample: CMakeFiles/OpenGLExample.dir/src/Shader.cpp.o
+OpenGLExample: CMakeFiles/OpenGLExample.dir/src/texture.cpp.o
 OpenGLExample: CMakeFiles/OpenGLExample.dir/src/VAO.cpp.o
 OpenGLExample: CMakeFiles/OpenGLExample.dir/src/VBO.cpp.o
-OpenGLExample: CMakeFiles/OpenGLExample.dir/src/glad.c.o
-OpenGLExample: CMakeFiles/OpenGLExample.dir/src/texture.cpp.o
 OpenGLExample: CMakeFiles/OpenGLExample.dir/build.make
 OpenGLExample: /usr/local/lib/libglfw3.a
 OpenGLExample: /usr/lib/x86_64-linux-gnu/libOpenGL.so

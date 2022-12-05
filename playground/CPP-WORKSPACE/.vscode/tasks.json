@@ -10,7 +10,7 @@
                 "-I./include",
                 "-L./lib",
                 "./src/glad.c",
-                "./src/model_flo.cpp",
+                "./src/main.cpp",
                 "./src/EBO.cpp",
                 "./src/VBO.cpp",
                 "./src/VAO.cpp",

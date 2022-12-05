@@ -19,9 +19,10 @@ file(GLOB  HEADER_FILES
 # Configure assets header file
 configure_file(src/helpers/RootDir.h.in src/helpers/RootDir.h)
 include_directories(${CMAKE_BINARY_DIR}/src)
-	
+
+set(PROJECT "src/main.cpp" "src/Camera.cpp" "src/EBO.cpp" "src/glad.c" "src/Shader.cpp" "src/texture.cpp" "src/VAO.cpp" "src/VBO.cpp" "include/flori/EBO.h" "include/flori/Shader.h" "include/flori/texture.h" "include/flori/VAO.h" "include/flori/VBO.h" "include/learopengl/Camera.h" "include/learopengl/mesh.h" "include/learopengl/model.h")
 # Define the executable
-add_executable(${PROJECT_NAME} src/main.cpp ${HEADER_FILES} ${SOURCE_FILES})
+add_executable(${PROJECT_NAME} ${PROJECT} )
 
 # We need a CMAKE_DIR with some code to find external dependencies
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
@@ -51,19 +52,18 @@ add_library(STB_IMAGE "thirdparty/stb_image.cpp")
 
 # GLAD
 add_library(GLAD "thirdparty/glad.c")
-
 # Put all libraries into a variable
 set(LIBS ${GLFW3_LIBRARY} ${OPENGL_LIBRARY} GLAD ${CMAKE_DL_LIBS} ${ASSIMP_LIBRARY} STB_IMAGE)
 
 # Define the include DIRs
 include_directories(
-	"${CMAKE_SOURCE_DIR}/src"
-	"${CMAKE_SOURCE_DIR}/include"
-	"${CMAKE_SOURCE_DIR}/include/glad"
-    "${CMAKE_SOURCE_DIR}/include/GLFW"
-    "${CMAKE_SOURCE_DIR}/include/json"
-    "${CMAKE_SOURCE_DIR}/include/KHR"
-	"${CMAKE_SOURCE_DIR}/include/stb"
+	src
+	include
+	include/glad
+    include/GLFW
+    include/json
+    include/KHR
+	include/stb
 )
 
 # Define the link libraries
