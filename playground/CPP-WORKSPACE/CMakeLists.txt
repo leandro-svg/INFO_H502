@@ -21,7 +21,7 @@ configure_file(src/helpers/RootDir.h.in src/helpers/RootDir.h)
 include_directories(${CMAKE_BINARY_DIR}/src)
 	
 # Define the executable
-add_executable(${PROJECT_NAME} src/model_flo.cpp ${HEADER_FILES} ${SOURCE_FILES})
+add_executable(${PROJECT_NAME} src/main.cpp ${HEADER_FILES} ${SOURCE_FILES})
 
 # We need a CMAKE_DIR with some code to find external dependencies
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/")
