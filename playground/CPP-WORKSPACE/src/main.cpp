@@ -295,7 +295,7 @@ int main()
         "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/cubemap/negy.jpg",
         "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/cubemap/posy.jpg",
         "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/cubemap/posz.jpg",
-        "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/cubemap/negz.jpg"
+        "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/cubemap/negy.jpg"
     };
     unsigned int cubemapTexture = loadCubemap(faces); 
 
