@@ -295,7 +295,7 @@ int main()
         "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/cubemap/negy.jpg",
         "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/cubemap/posy.jpg",
         "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/cubemap/posz.jpg",
-        "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/cubemap/negzsqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq.jpg"
+        "/home/leand/ULB_course/INFO-H502/playground/CPP-WORKSPACE/cubemap/negz.jpg"
     };
     unsigned int cubemapTexture = loadCubemap(faces); 
 
@@ -329,13 +329,12 @@ int main()
         
         glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 
+
+        // CUBEMAP
         glDepthMask(GL_FALSE);
         ourShaderFourth.Activate();
         glm::mat4 projectionY = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         ourShaderFourth.setMat4("projectionY", projectionY);
-
-
-        // camera/view transformation
         glm::mat4 viewY = camera.GetViewMatrix();
         viewY = glm::mat4(glm::mat3(camera.GetViewMatrix()));
         ourShaderFourth.setMat4("viewY", viewY);
@@ -344,61 +343,29 @@ int main()
         glDrawArrays(GL_TRIANGLES, 0, 36);
         glDepthMask(GL_TRUE);
 
+        // NEW SHADER
         ourShader.Activate();
         ourShader.setVec3("viewPos", camera.Position); 
-        ourShader.setVec3("lightColor",  1.0f, 1.0f, 1.0f);
-        ourShader.setFloatReal("ambient",  0.0f);
         ourShader.setVec3("lightPos",  lightPos);
-        glm::mat4 trans = glm::mat4(1.0f);
-        trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(1.0f, 1.0f, 1.0f));
-        trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
-        unsigned int transformLoc = glGetUniformLocation(ourShader.ID, "transform_text");
-        glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
-
-        int modelLoc = glGetUniformLocation(ourShader.ID, "model");
-        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-
         glm::mat4 projectionX = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         ourShader.setMat4("projectionX", projectionX);
-
         glm::mat4 viewX = camera.GetViewMatrix();
         ourShader.setMat4("viewX", viewX);
-        VAO1.Bind();        
-        
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
-        ourShader.setVec3("lightColor",  1.0f, 1.0f, 1.0f);
-        ourShader.setVec3("lightPos",  lightPos);
-        ourShader.setFloatReal("ambient",  0.0f);
-        glm::mat4 trans2 = glm::mat4(1.0f);
-        trans2 = glm::translate(trans2, glm::vec3(0.5f, -0.5f, -0.0f));
-        trans2 = glm::rotate(trans2, (float)glfwGetTime(), glm::vec3(1.0f, 1.0f, 1.0f));
-        double  sctimeValue = glfwGetTime();
-        float scaling = static_cast<float>(sin(sctimeValue)/1.0);
-        trans2 = glm::scale(trans2, glm::vec3(scaling,scaling,scaling));  
-
-        unsigned int transformLoc2 = glGetUniformLocation(ourShader.ID, "transform_text");
-        glUniformMatrix4fv(transformLoc2, 1, GL_FALSE, glm::value_ptr(trans2));
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        // LIGHT
         VAO3.Bind();
         glm::mat4 trans3 = glm::mat4(1.0f);
         trans3 = glm::translate(trans3, lightPos);
         trans3 = glm::rotate(trans3, 0.0f, glm::vec3(1.0f, 0.0f, 1.0f));
         ourShader.setVec3("lightColor",  1000.0f, 1000.0f, 1000.0f);
         ourShader.setFloatReal("ambient",  1000.0f);
-        
-
         unsigned int transformLoc3 = glGetUniformLocation(ourShader.ID, "transform_text");
         glUniformMatrix4fv(transformLoc3, 1, GL_FALSE, glm::value_ptr(trans3));
         glDrawArrays(GL_TRIANGLES, 0, 36);
 
-
-        ourShader.setMat4("projectionX", projectionX);
-        ourShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
+        // RED BOX
         ourShader.setFloatReal("ambient",  0.1f); //sin((float)glfwGetTime()) + 1);
-        ourShader.setVec3("lightPos", lightPos);  
-        ourShader.setMat4("viewX", viewX);
-        for(unsigned int i = 0; i < 10; i++)
+        for(unsigned int i = 0; i < 2; i++)
         {   
             glm::mat4 trans3 = glm::mat4(1.0f);
             trans3 = glm::translate(trans3, glm::vec3(-0.0f, -0.0f, -0.0f));
@@ -423,13 +390,13 @@ int main()
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
 
+        // MODEL
         ourShaderThird.Activate();
 
         glm::mat4 projection5 = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         glm::mat4 view5 = camera.GetViewMatrix();
         ourShaderThird.setMat4("projection5", projection5);
         ourShaderThird.setMat4("view5", view5);
-
         glm::mat4 model5 = glm::mat4(1.0f);
         ourShaderThird.setVec3("lightColor5",  1.0f, 1.0f, 1.0f);
         ourShaderThird.setFloatReal("ambient5",  1.0f);
@@ -442,34 +409,8 @@ int main()
         model5= glm::scale(model5, glm::vec3(0.005f, 0.005f, 0.005f));	// it's a bit too big for our scene, so scale it down
         ourShaderThird.setMat4("model5", model5);
         ourModel.Draw(ourShaderThird);
-        glm::mat4 model2 = glm::mat4(1.0f);
-        model2 = glm::translate(model2, glm::vec3(-2.0f, -2.0f, 0.0f)); // translate it down so it's at the center of the scene
-        model2 = glm::scale(model2, glm::vec3(0.005f, 0.005f, 0.005f));	// it's a bit too big for our scene, so scale it down
-        ourShaderThird.setMat4("model5", model2);
-        SecondModel.Draw(ourShaderThird);
-
-        glm::mat4 model3 = glm::mat4(1.0f);
-        model3 = glm::translate(model3, glm::vec3(-2.0f, -2.0f, -4.0f)); // translate it down so it's at the center of the scene
-        model3 = glm::scale(model3, glm::vec3(0.005f, 0.005f, 0.005f));	// it's a bit too big for our scene, so scale it down
-        ourShaderThird.setMat4("model5", model3);
-        mapModel.Draw(ourShaderThird);
-
-        glm::mat4 model4 = glm::mat4(1.0f);
-        model4 = glm::translate(model4, glm::vec3(-2.0f, -2.0f, 4.0f)); // translate it down so it's at the center of the scene
-        model4 = glm::scale(model4, glm::vec3(0.005f, 0.005f, 0.005f));	// it's a bit too big for our scene, so scale it down
-        ourShaderThird.setMat4("model5", model4);
-        tryModel.Draw(ourShaderThird);
+      
         
-        
-        ourShaderSecond.Activate();
-
-        // camera/view transformation
-        VAO2.Bind();
-        double  timeValue = glfwGetTime();
-        float greenValue = static_cast<float>(sin(timeValue)/1.0);
-
-        ourShaderSecond.setFloat("offset", greenValue);
-        glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
         glfwSwapBuffers(window);
         glfwPollEvents();
         glfwSwapInterval(1);
